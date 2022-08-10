@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 namespace WikiApplication
 {
-    public partial class Form1 : Form
+    public partial class FormWikiApplication : Form
     {
-        public Form1()
+        public FormWikiApplication()
         {
             InitializeComponent();
         }
+        static int row = 12;
+        static int col = 4;
+        private string[,] ArrayWiki = new string[row, col];
     }
 }
