@@ -21,5 +21,11 @@ namespace WikiApplication
         static int row = 12;                                    /* Number of records */
         static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
+
+        // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array,
+        private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
