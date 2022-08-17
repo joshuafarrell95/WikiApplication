@@ -16,8 +16,10 @@ namespace WikiApplication
         {
             InitializeComponent();
         }
-        static int row = 12;
-        static int col = 4;
+
+        // 9.1	Create a global 2D string array, use static variables for the dimensions (row, column),
+        static int row = 12;                                    /* Number of records */
+        static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
     }
 }
