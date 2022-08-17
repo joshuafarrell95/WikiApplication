@@ -27,5 +27,11 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array,
+        private void ButtonEdit_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
