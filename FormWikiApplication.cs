@@ -121,10 +121,10 @@ namespace WikiApplication
                         "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if (userDecision == DialogResult.OK)
                     {
-                        ArrayWiki[selectedIndex, 0] = "";
-                        ArrayWiki[selectedIndex, 1] = "";
-                        ArrayWiki[selectedIndex, 2] = "";
-                        ArrayWiki[selectedIndex, 3] = "";
+                        ArrayWiki[selectedIndex, 0] = "";       /* Data Structure Text */
+                        ArrayWiki[selectedIndex, 1] = "";       /* Category Text */
+                        ArrayWiki[selectedIndex, 2] = "";       /* Structure Text */
+                        ArrayWiki[selectedIndex, 3] = "";       /* Description Text */
                     }
                 }
                 else
@@ -169,6 +169,7 @@ namespace WikiApplication
                 lvi.SubItems.Add(ArrayWiki[x, 1].ToString());           /* Category */
                 listViewWiki.Items.Add(lvi);
             }
+            BubbleSort();
         }
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
