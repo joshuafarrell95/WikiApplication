@@ -190,6 +190,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormWikiApplication";
             this.Text = "Wiki Application";
+            this.Load += new System.EventHandler(this.FormWikiApplication_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

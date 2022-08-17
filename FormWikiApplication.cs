@@ -22,10 +22,33 @@ namespace WikiApplication
         static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
 
+        private void FormWikiApplication_Load(object sender, EventArgs e)
+        {
+            InitialiseArray();
+        }
+
+        private void InitialiseArray()
+        {
+            for (int x = 0; x < row; x++)
+            {
+                for (int y = 0; y < col; y++) {
+                    ArrayWiki[x, y] = "";
+                }
+            }
+        }
+
         // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array,
         private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void AddInformation()
+        {
+            for (int x = 0; x < row; x++)
+            {
+
+            }
         }
 
         // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array,
