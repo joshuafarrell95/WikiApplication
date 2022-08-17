@@ -40,5 +40,11 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added,
+        private void ClearRecord()
+        {
+
+        }
     }
 }
