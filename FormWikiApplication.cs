@@ -64,7 +64,8 @@ namespace WikiApplication
             }
             if (!flag)
             {
-                MessageBox.Show("You must delete a record before adding a new record.", "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must delete a record before adding a new record.",
+                    "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             DisplayList();
         }
@@ -81,7 +82,6 @@ namespace WikiApplication
             try
             {
                 int selectedIndex = listViewWiki.SelectedIndices[0];
-                Trace.TraceInformation(selectedIndex.ToString());
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
                     ArrayWiki[selectedIndex, 0] = textBoxDataStructureName.Text;
@@ -106,11 +106,35 @@ namespace WikiApplication
         private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
         {
             statusStrip.Items.Clear();
+            DeleteInformation();
         }
 
         private void DeleteInformation()
         {
-            
+            try
+            {
+                int selectedIndex = listViewWiki.SelectedIndices[0];
+
+                var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
+                    "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (userDecision == DialogResult.OK)
+                {
+                    ArrayWiki[selectedIndex, 0] = "";
+                    ArrayWiki[selectedIndex, 1] = "";
+                    ArrayWiki[selectedIndex, 2] = "";
+                    ArrayWiki[selectedIndex, 3] = "";
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                statusStrip.Items.Add("Please select a valid record to delete");
+            }
+            DisplayList();
         }
 
         // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added,
