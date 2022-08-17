@@ -78,18 +78,16 @@ namespace WikiApplication
 
         private void EditInformation()
         {
-            int selectedIndex = -1;
-
             try
             {
-                selectedIndex = listViewWiki.SelectedIndices[0];
+                int selectedIndex = listViewWiki.SelectedIndices[0];
                 Trace.TraceInformation(selectedIndex.ToString());
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
-                    textBoxDataStructureName.Text = ArrayWiki[selectedIndex, 0].ToString();
-                    textBoxCategory.Text = ArrayWiki[selectedIndex, 1].ToString();
-                    textBoxStructure.Text = ArrayWiki[selectedIndex, 2].ToString();
-                    textBoxDefinition.Text = ArrayWiki[selectedIndex, 3].ToString();
+                    ArrayWiki[selectedIndex, 0] = textBoxDataStructureName.Text;
+                    ArrayWiki[selectedIndex, 1] = textBoxCategory.Text;
+                    ArrayWiki[selectedIndex, 2] = textBoxStructure.Text;
+                    ArrayWiki[selectedIndex, 3] = textBoxDefinition.Text;
                 }
                 else
                 {
