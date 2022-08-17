@@ -84,5 +84,17 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.11	Create a LOAD button that will read the information from a binary file called definitions.dat into the 2D array,
+        // ensure the user has the option to select an alternative file.Use a file stream and BinaryReader to complete this task.
+        private void ButtonLoad_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void LoadData()
+        {
+
+        }
     }
 }
