@@ -33,5 +33,12 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.4	Create a DELETE button that removes all the information from a single entry of the array;
+        // the user must be prompted before the final deletion occurs,
+        private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
