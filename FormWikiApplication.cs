@@ -60,5 +60,11 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
+        private void DisplayList()
+        {
+
+        }
     }
 }
