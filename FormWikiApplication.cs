@@ -66,7 +66,6 @@ namespace WikiApplication
             {
                 MessageBox.Show("You must delete a record before adding a new record.", "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             DisplayList();
         }
 
@@ -83,24 +82,25 @@ namespace WikiApplication
 
             try
             {
-                if (listViewWiki.SelectedItems.Count <= 0)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
                 selectedIndex = listViewWiki.SelectedIndices[0];
                 Trace.TraceInformation(selectedIndex.ToString());
-                if (selectedIndex >= 0)
+                if (ArrayWiki[selectedIndex, 0] != "")
                 {
                     textBoxDataStructureName.Text = ArrayWiki[selectedIndex, 0].ToString();
                     textBoxCategory.Text = ArrayWiki[selectedIndex, 1].ToString();
                     textBoxStructure.Text = ArrayWiki[selectedIndex, 2].ToString();
                     textBoxDefinition.Text = ArrayWiki[selectedIndex, 3].ToString();
                 }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
             }
             catch (ArgumentOutOfRangeException ex)
             {
                 statusStrip.Items.Add("Please select a valid record to edit");
             }
+            DisplayList();
         }
 
         // 9.4	Create a DELETE button that removes all the information from a single entry of the array;
@@ -110,7 +110,7 @@ namespace WikiApplication
             statusStrip.Items.Clear();
         }
 
-        private void DeleteRecord()
+        private void DeleteInformation()
         {
             
         }
