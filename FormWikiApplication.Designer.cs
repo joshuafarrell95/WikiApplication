@@ -44,6 +44,7 @@
             this.labelDefinition = new System.Windows.Forms.Label();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -104,7 +105,7 @@
             this.listViewWiki.HideSelection = false;
             this.listViewWiki.Location = new System.Drawing.Point(338, 39);
             this.listViewWiki.Name = "listViewWiki";
-            this.listViewWiki.Size = new System.Drawing.Size(450, 399);
+            this.listViewWiki.Size = new System.Drawing.Size(211, 356);
             this.listViewWiki.TabIndex = 5;
             this.listViewWiki.UseCompatibleStateImageBehavior = false;
             this.listViewWiki.View = System.Windows.Forms.View.Details;
@@ -135,7 +136,7 @@
             this.textBoxDefinition.Location = new System.Drawing.Point(12, 112);
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
-            this.textBoxDefinition.Size = new System.Drawing.Size(239, 326);
+            this.textBoxDefinition.Size = new System.Drawing.Size(239, 283);
             this.textBoxDefinition.TabIndex = 9;
             // 
             // labelDataStructureName
@@ -177,16 +178,27 @@
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Name";
+            this.columnHeaderName.Width = 81;
             // 
             // columnHeaderCategory
             // 
             this.columnHeaderCategory.Text = "Category";
+            this.columnHeaderCategory.Width = 85;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(567, 22);
+            this.statusStrip.TabIndex = 14;
+            this.statusStrip.Text = "statusStrip";
             // 
             // FormWikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(567, 450);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.labelDefinition);
             this.Controls.Add(this.labelStructure);
             this.Controls.Add(this.labelCategory);
@@ -227,6 +239,7 @@
         private System.Windows.Forms.Label labelDefinition;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderCategory;
+        private System.Windows.Forms.StatusStrip statusStrip;
     }
 }
 

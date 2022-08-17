@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace WikiApplication
 {
@@ -41,6 +42,7 @@ namespace WikiApplication
         // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array,
         private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
         {
+            statusStrip.Items.Clear();
             AddInformation();
         }
 
@@ -71,19 +73,33 @@ namespace WikiApplication
         // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array,
         private void ButtonEdit_MouseClick(object sender, MouseEventArgs e)
         {
-            int selectedIndex = -1;
-
-            if (listViewWiki.SelectedItems.Count != 0)
-            {
-                
-            }
+            statusStrip.Items.Clear();
+            EditInformation();
         }
 
         private void EditInformation()
         {
-            for (int x = 0; x < row; x++)
-            {
+            int selectedIndex = -1;
 
+            try
+            {
+                if (listViewWiki.SelectedItems.Count <= 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                selectedIndex = listViewWiki.SelectedIndices[0];
+                Trace.TraceInformation(selectedIndex.ToString());
+                if (selectedIndex >= 0)
+                {
+                    textBoxDataStructureName.Text = ArrayWiki[selectedIndex, 0].ToString();
+                    textBoxCategory.Text = ArrayWiki[selectedIndex, 1].ToString();
+                    textBoxStructure.Text = ArrayWiki[selectedIndex, 2].ToString();
+                    textBoxDefinition.Text = ArrayWiki[selectedIndex, 3].ToString();
+                }
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                statusStrip.Items.Add("Please select a valid record to edit");
             }
         }
 
@@ -91,7 +107,12 @@ namespace WikiApplication
         // the user must be prompted before the final deletion occurs,
         private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
         {
+            statusStrip.Items.Clear();
+        }
 
+        private void DeleteRecord()
+        {
+            
         }
 
         // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added,
