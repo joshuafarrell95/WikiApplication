@@ -35,26 +35,56 @@ namespace WikiApplication
                     ArrayWiki[x, y] = "";
                 }
             }
+            DisplayList();
         }
 
         // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array,
         private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
         {
-
+            AddInformation();
         }
 
         private void AddInformation()
         {
+            bool flag = false;
+            
             for (int x = 0; x < row; x++)
             {
-
+                if ((ArrayWiki[x, 0] == "") && !flag)
+                {
+                    ArrayWiki[x, 0] = textBoxDataStructureName.Text;
+                    ArrayWiki[x, 1] = textBoxCategory.Text;
+                    ArrayWiki[x, 2] = textBoxStructure.Text;
+                    ArrayWiki[x, 3] = textBoxDefinition.Text;
+                    flag = true;
+                    break;
+                }
             }
+            if (!flag)
+            {
+                MessageBox.Show("You must delete a record before adding a new record.", "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            DisplayList();
         }
 
         // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array,
         private void ButtonEdit_MouseClick(object sender, MouseEventArgs e)
         {
+            int selectedIndex = -1;
 
+            if (listViewWiki.SelectedItems.Count != 0)
+            {
+                
+            }
+        }
+
+        private void EditInformation()
+        {
+            for (int x = 0; x < row; x++)
+            {
+
+            }
         }
 
         // 9.4	Create a DELETE button that removes all the information from a single entry of the array;
@@ -87,7 +117,13 @@ namespace WikiApplication
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
         private void DisplayList()
         {
-
+            listViewWiki.Items.Clear();
+            for(int x = 0; x < row; x++)
+            {
+                ListViewItem lvi = new ListViewItem(ArrayWiki[x, 0]);   /* Name */
+                lvi.SubItems.Add(ArrayWiki[x, 1].ToString());           /* Category */
+                listViewWiki.Items.Add(lvi);
+            }
         }
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,

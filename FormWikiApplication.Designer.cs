@@ -42,6 +42,8 @@
             this.labelCategory = new System.Windows.Forms.Label();
             this.labelStructure = new System.Windows.Forms.Label();
             this.labelDefinition = new System.Windows.Forms.Label();
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -96,6 +98,9 @@
             // 
             // listViewWiki
             // 
+            this.listViewWiki.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderName,
+            this.columnHeaderCategory});
             this.listViewWiki.HideSelection = false;
             this.listViewWiki.Location = new System.Drawing.Point(338, 39);
             this.listViewWiki.Name = "listViewWiki";
@@ -169,6 +174,14 @@
             this.labelDefinition.TabIndex = 13;
             this.labelDefinition.Text = "Definition:";
             // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.Text = "Name";
+            // 
+            // columnHeaderCategory
+            // 
+            this.columnHeaderCategory.Text = "Category";
+            // 
             // FormWikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,6 +225,8 @@
         private System.Windows.Forms.Label labelCategory;
         private System.Windows.Forms.Label labelStructure;
         private System.Windows.Forms.Label labelDefinition;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderCategory;
     }
 }
 
