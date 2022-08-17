@@ -115,15 +115,17 @@ namespace WikiApplication
             {
                 int selectedIndex = listViewWiki.SelectedIndices[0];
 
-                var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
-                    "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-                if (userDecision == DialogResult.OK)
+                if (ArrayWiki[selectedIndex, 0] != "")
                 {
-                    ArrayWiki[selectedIndex, 0] = "";
-                    ArrayWiki[selectedIndex, 1] = "";
-                    ArrayWiki[selectedIndex, 2] = "";
-                    ArrayWiki[selectedIndex, 3] = "";
+                    var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?", 
+                        "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (userDecision == DialogResult.OK)
+                    {
+                        ArrayWiki[selectedIndex, 0] = "";
+                        ArrayWiki[selectedIndex, 1] = "";
+                        ArrayWiki[selectedIndex, 2] = "";
+                        ArrayWiki[selectedIndex, 3] = "";
+                    }
                 }
                 else
                 {
