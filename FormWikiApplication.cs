@@ -53,5 +53,12 @@ namespace WikiApplication
         {
 
         }
+
+        // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
+        // add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods),
+        private void BinarySearch()
+        {
+
+        }
     }
 }
