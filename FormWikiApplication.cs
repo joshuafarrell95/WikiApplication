@@ -161,7 +161,27 @@ namespace WikiApplication
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
         private void BubbleSort()
         {
+            bool flag = true;
+            for (int x = 0; x <= (row - 1); x++)
+            {
+                flag = false;
+                for (int xy = 0; xy < row; xy++)
+                {
+                    if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) == 0)
+                    {
+                        Swap(x);
+                    }
+                }
+            }
+        }
 
+        private void Swap(int indx)
+        {
+            String temp = ArrayWiki[indx, 0];
+
+            ArrayWiki[indx, 0] = ArrayWiki[indx + 1, 0];
+
+            ArrayWiki[indx + 1, 0] = temp;
         }
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
