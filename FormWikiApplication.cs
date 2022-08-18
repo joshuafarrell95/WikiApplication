@@ -140,9 +140,21 @@ namespace WikiApplication
         }
 
         // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added,
-        private void ClearRecord()
+        private void TextBoxDataStructureName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            ClearTextBoxes();
+        }
 
+        private void ClearTextBoxes()
+        {
+            statusStrip.Items.Clear();
+
+            textBoxDataStructureName.Clear();
+            textBoxCategory.Clear();
+            textBoxStructure.Clear();
+            textBoxDefinition.Clear();
+
+            statusStrip.Items.Add("Text boxes cleared, you may now add a new definition");
         }
 
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
@@ -201,5 +213,7 @@ namespace WikiApplication
         {
 
         }
+
+        
     }
 }
