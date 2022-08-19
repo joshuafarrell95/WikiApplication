@@ -162,23 +162,23 @@ namespace WikiApplication
         private void BubbleSort()
         {
             bool flag = true;
-            for (int x = 0; x <= (row - 1); x++)
+            for (int x = 0; (x <= (row - 1)); x++)
             {
                 flag = false;
-                for (int xy = 0; xy < row; xy++)
+                for (int xy = 0; xy < (row - 1); xy++)
                 {
                     if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) == 0)
                     {
                         for (int y = 0; y < col; y++)
                         {
-                            Swap(x, y);
+                            flag = Swap(x, y);
                         }
                     }
                 }
             }
         }
 
-        private void Swap(int indx, int indy)
+        private bool Swap(int indx, int indy)
         {
             try
             {     
@@ -192,6 +192,7 @@ namespace WikiApplication
             {
 
             }
+            return true;
         }
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
@@ -246,7 +247,7 @@ namespace WikiApplication
 
         private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
         {
-            BubbleSort();2
+            BubbleSort();
         }
     }
 }
