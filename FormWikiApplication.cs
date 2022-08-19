@@ -169,19 +169,29 @@ namespace WikiApplication
                 {
                     if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) == 0)
                     {
-                        Swap(x);
+                        for (int y = 0; y < col; y++)
+                        {
+                            Swap(x, y);
+                        }
                     }
                 }
             }
         }
 
-        private void Swap(int indx)
+        private void Swap(int indx, int indy)
         {
-            String temp = ArrayWiki[indx, 0];
+            try
+            {     
+                String temp = ArrayWiki[indx, indy];
 
-            ArrayWiki[indx, 0] = ArrayWiki[indx + 1, 0];
+                ArrayWiki[indx, indy] = ArrayWiki[indx + 1, indy];
 
-            ArrayWiki[indx + 1, 0] = temp;
+                ArrayWiki[indx + 1, indy] = temp;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+
+            }
         }
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
@@ -201,7 +211,7 @@ namespace WikiApplication
                 lvi.SubItems.Add(ArrayWiki[x, 1].ToString());           /* Category */
                 listViewWiki.Items.Add(lvi);
             }
-            BubbleSort();
+            //BubbleSort();
         }
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
@@ -234,6 +244,9 @@ namespace WikiApplication
 
         }
 
-        
+        private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
+        {
+            BubbleSort();2
+        }
     }
 }
