@@ -158,7 +158,14 @@ namespace WikiApplication
             textBoxStructure.Clear();
             textBoxDefinition.Clear();
 
-            statusStrip.Items.Add("Text boxes cleared, you may now add a new definition");
+            if (ArrayWiki[11, 0] == "")             /* Check if row 12 has a record and give correct feedback */
+            {
+                statusStrip.Items.Add("Text boxes cleared, you may now add a new definition");
+            }
+            else
+            {
+                statusStrip.Items.Add("Text boxes cleared, you must delete a definition before adding another");
+            }
         }
 
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
@@ -171,7 +178,7 @@ namespace WikiApplication
                 flag = false;
                 for (int xy = 0; xy < (row - 1); xy++)
                 {
-                    if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) == 0)
+                    if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) > 0)
                     {
                         for (int y = 0; y < col; y++)
                         {
