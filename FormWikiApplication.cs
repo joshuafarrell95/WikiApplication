@@ -23,6 +23,8 @@ namespace WikiApplication
         static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
 
+        Random random = new Random();
+
         private void FormWikiApplication_Load(object sender, EventArgs e)
         {
             InitialiseArray();
@@ -33,7 +35,9 @@ namespace WikiApplication
             for (int x = 0; x < row; x++)
             {
                 for (int y = 0; y < col; y++) {
-                    ArrayWiki[x, y] = "";
+                    //ArrayWiki[x, y] = "";                                 /* Production code */
+                    ArrayWiki[x, 0] = random.Next(1, row).ToString();       /* Testing code */
+                    ArrayWiki[x, 1] = random.Next(1, row).ToString();
                 }
             }
             DisplayList();
@@ -190,7 +194,7 @@ namespace WikiApplication
             }
             catch (IndexOutOfRangeException ex)
             {
-
+                return false;
             }
             return true;
         }
