@@ -111,7 +111,7 @@
             this.listViewWiki.Location = new System.Drawing.Point(507, 60);
             this.listViewWiki.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewWiki.Name = "listViewWiki";
-            this.listViewWiki.Size = new System.Drawing.Size(314, 546);
+            this.listViewWiki.Size = new System.Drawing.Size(542, 546);
             this.listViewWiki.TabIndex = 5;
             this.listViewWiki.UseCompatibleStateImageBehavior = false;
             this.listViewWiki.View = System.Windows.Forms.View.Details;
@@ -119,12 +119,12 @@
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Name";
-            this.columnHeaderName.Width = 81;
+            this.columnHeaderName.Width = 187;
             // 
             // columnHeaderCategory
             // 
             this.columnHeaderCategory.Text = "Category";
-            this.columnHeaderCategory.Width = 85;
+            this.columnHeaderCategory.Width = 251;
             // 
             // textBoxDataStructureName
             // 
@@ -203,10 +203,10 @@
             // statusStrip
             // 
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.statusStrip.Location = new System.Drawing.Point(0, 664);
+            this.statusStrip.Location = new System.Drawing.Point(0, 670);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip.Size = new System.Drawing.Size(850, 28);
+            this.statusStrip.Size = new System.Drawing.Size(1081, 22);
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -214,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 692);
+            this.ClientSize = new System.Drawing.Size(1081, 692);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.labelDefinition);
             this.Controls.Add(this.labelStructure);

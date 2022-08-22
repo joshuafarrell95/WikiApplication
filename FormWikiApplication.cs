@@ -25,8 +25,6 @@ namespace WikiApplication
         static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
 
-        Random random = new Random();                           /* Testing code */
-
         private void FormWikiApplication_Load(object sender, EventArgs e)
         {
             InitialiseArray();
@@ -37,23 +35,7 @@ namespace WikiApplication
             for (int x = 0; x < row; x++)
             {
                 for (int y = 0; y < col; y++) {
-                    //ArrayWiki[x, y] = "";                                 /* Production code */
-                    //ArrayWiki[x, 0] = random.Next(1, row).ToString();       /* Testing code */
-                    ArrayWiki[0, 0] = "x";
-                    ArrayWiki[1, 0] = "d";
-                    ArrayWiki[2, 0] = "c";
-                    ArrayWiki[3, 0] = "z";
-                    ArrayWiki[4, 0] = "a";
-                    ArrayWiki[5, 0] = "b";
-                    ArrayWiki[6, 0] = "f";
-                    ArrayWiki[7, 0] = "e";
-                    ArrayWiki[8, 0] = "h";
-                    ArrayWiki[9, 0] = "g";
-                    ArrayWiki[10, 0] = "j";
-                    ArrayWiki[11, 0] = "i";
-                    ArrayWiki[x, 1] = random.Next(1, row).ToString();
-                    ArrayWiki[x, 2] = random.Next(1, row).ToString();
-                    ArrayWiki[x, 3] = random.Next(1, row).ToString();
+                    ArrayWiki[x, y] = "";
                 }
             }
             DisplayList();
