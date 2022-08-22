@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace WikiApplication
 {
@@ -19,11 +20,12 @@ namespace WikiApplication
         }
 
         // 9.1	Create a global 2D string array, use static variables for the dimensions (row, column),
+        #region 9.1
         static int row = 12;                                    /* Number of records */
         static int col = 4;                                     /* Data Structure Name, Category, Structure and Definition */
         private string[,] ArrayWiki = new string[row, col];
 
-        Random random = new Random();
+        Random random = new Random();                           /* Testing code */
 
         private void FormWikiApplication_Load(object sender, EventArgs e)
         {
@@ -42,8 +44,10 @@ namespace WikiApplication
             }
             DisplayList();
         }
+        #endregion
 
         // 9.2	Create an ADD button that will store the information from the 4 text boxes into the 2D array,
+        #region 9.2
         private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
         {
             statusStrip.Items.Clear();
@@ -73,8 +77,10 @@ namespace WikiApplication
             }
             DisplayList();
         }
+        #endregion
 
         // 9.3	Create an EDIT button that will allow the user to modify any information from the 4 text boxes into the 2D array,
+        #region 9.3
         private void ButtonEdit_MouseClick(object sender, MouseEventArgs e)
         {
             statusStrip.Items.Clear();
@@ -104,9 +110,11 @@ namespace WikiApplication
             }
             DisplayList();
         }
+        #endregion
 
         // 9.4	Create a DELETE button that removes all the information from a single entry of the array;
         // the user must be prompted before the final deletion occurs,
+        #region 9.4
         private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
         {
             statusStrip.Items.Clear();
@@ -142,8 +150,10 @@ namespace WikiApplication
             }
             DisplayList();
         }
+        #endregion
 
         // 9.5	Create a CLEAR method to clear the four text boxes so a new definition can be added,
+        #region 9.5
         private void TextBoxDataStructureName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ClearTextBoxes();
@@ -167,29 +177,37 @@ namespace WikiApplication
                 statusStrip.Items.Add("Text boxes cleared, you must delete a definition before adding another");
             }
         }
+        #endregion
 
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
         private void BubbleSort()
         {
-            bool flag = true;
-            for (int x = 0; (x <= (row - 1)); x++)
+            for (int a = 0; a < row - 1; a++)
             {
-                flag = false;
-                for (int xy = 0; xy < (row - 1); xy++)
+                
+                for (int b = 0; b < (row - 1); b++)
                 {
-                    if (ArrayWiki[x, 0].CompareTo(ArrayWiki[xy, 0]) > 0)
+                    if (ArrayWiki[a, 0].CompareTo(ArrayWiki[b, 0]) > 0)
                     {
                         for (int y = 0; y < col; y++)
                         {
-                            flag = Swap(x, y);
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            Swap(a, b);
                         }
                     }
                 }
             }
         }
 
-        private bool Swap(int indx, int indy)
+        private void Swap(int indx, int indy)
         {
             try
             {     
@@ -201,9 +219,9 @@ namespace WikiApplication
             }
             catch (IndexOutOfRangeException ex)
             {
-                return false;
+                
             }
-            return true;
+            
         }
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
@@ -236,12 +254,32 @@ namespace WikiApplication
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
         private void ButtonSave_MouseClick(object sender, MouseEventArgs e)
         {
-
+            SaveData();
         }
 
         private void SaveData()
         {
+            string fileName = "definitions.dat";
 
+            try
+            {
+                using (var stream = File.Open(fileName, FileMode.Create))
+                {
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false)) {
+                        for (int x = 0; x < row; x++)
+                        {
+                            for (int y = 0; y < col; y++)
+                            {
+                                writer.Write(ArrayWiki[x, y].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // 9.11	Create a LOAD button that will read the information from a binary file called definitions.dat into the 2D array,
