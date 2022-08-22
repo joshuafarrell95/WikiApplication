@@ -45,11 +45,14 @@
             this.labelStructure = new System.Windows.Forms.Label();
             this.labelDefinition = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(386, 57);
+            this.buttonAdd.Location = new System.Drawing.Point(22, 616);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(112, 35);
@@ -60,7 +63,7 @@
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(386, 102);
+            this.buttonEdit.Location = new System.Drawing.Point(142, 616);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(112, 35);
@@ -71,7 +74,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(386, 146);
+            this.buttonDelete.Location = new System.Drawing.Point(262, 616);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(112, 35);
@@ -82,7 +85,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(386, 191);
+            this.buttonSave.Location = new System.Drawing.Point(817, 616);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(112, 35);
@@ -93,7 +96,7 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(386, 235);
+            this.buttonLoad.Location = new System.Drawing.Point(937, 616);
             this.buttonLoad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(112, 35);
@@ -108,10 +111,10 @@
             this.columnHeaderName,
             this.columnHeaderCategory});
             this.listViewWiki.HideSelection = false;
-            this.listViewWiki.Location = new System.Drawing.Point(507, 60);
+            this.listViewWiki.Location = new System.Drawing.Point(414, 60);
             this.listViewWiki.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewWiki.Name = "listViewWiki";
-            this.listViewWiki.Size = new System.Drawing.Size(542, 546);
+            this.listViewWiki.Size = new System.Drawing.Size(635, 546);
             this.listViewWiki.TabIndex = 5;
             this.listViewWiki.UseCompatibleStateImageBehavior = false;
             this.listViewWiki.View = System.Windows.Forms.View.Details;
@@ -210,11 +213,39 @@
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(414, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Search:";
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(505, 17);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(424, 26);
+            this.textBoxSearch.TabIndex = 16;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(937, 14);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(112, 35);
+            this.buttonSearch.TabIndex = 17;
+            this.buttonSearch.Text = "SEARCH";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            // 
             // FormWikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 692);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.textBoxSearch);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.labelDefinition);
             this.Controls.Add(this.labelStructure);
@@ -258,6 +289,9 @@
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderCategory;
         private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }
 

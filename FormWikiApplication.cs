@@ -221,6 +221,7 @@ namespace WikiApplication
         }
 
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
+        #region 9.8
         private void DisplayList()
         {
             BubbleSort();
@@ -232,6 +233,7 @@ namespace WikiApplication
                 listViewWiki.Items.Add(lvi);
             }
         }
+        #endregion
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
         private void SelectDefinition()
