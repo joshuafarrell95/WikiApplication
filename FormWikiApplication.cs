@@ -289,12 +289,20 @@ namespace WikiApplication
         #endregion
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
-        private void SelectDefinition()
+        private void ListViewWiki_MouseClick(object sender, MouseEventArgs e)
         {
-            string selectedItem = listViewWiki.SelectedItems[0].ToString();
-            int selectedIndex = listViewWiki.FindItemWithText(selectedItem);
+            SelectDefinition();
         }
 
+        private void SelectDefinition()
+        {
+            int selectedIndex = listViewWiki.SelectedIndices[0];
+
+            textBoxDataStructureName.Text = ArrayWiki[selectedIndex, 0];
+            textBoxCategory.Text = ArrayWiki[selectedIndex, 1];
+            textBoxStructure.Text = ArrayWiki[selectedIndex, 2];
+            textBoxDefinition.Text = ArrayWiki[selectedIndex, 3];
+        }
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
@@ -394,5 +402,7 @@ namespace WikiApplication
             DisplayList();
         }
         #endregion
+
+        
     }
 }
