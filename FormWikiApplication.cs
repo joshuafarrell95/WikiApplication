@@ -252,25 +252,41 @@ namespace WikiApplication
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
+        const string DEFAULT_FILE_NAME = "definitions.dat";
+
         private void ButtonSave_MouseClick(object sender, MouseEventArgs e)
         {
-            SaveData();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "dat files (*.dat)|*.dat";
+            saveFileDialog.Title = "Save a DAT file";
+            saveFileDialog.InitialDirectory = Application.StartupPath;
+            saveFileDialog.DefaultExt = "dat";
+            saveFileDialog.ShowDialog();
+            string fileName = saveFileDialog.FileName;
+            
+            if(saveFileDialog.FileName != "")
+            {
+                SaveData(fileName);
+            }
+            else
+            {
+                SaveData(DEFAULT_FILE_NAME);
+            }
         }
 
-        private void SaveData()
+        private void SaveData(string saveFileName)
         {
-            string fileName = "definitions.dat";
-
             try
             {
-                using (var stream = File.Open(fileName, FileMode.Create))
+                using (Stream stream = File.Open(saveFileName, FileMode.Create))
                 {
                     using (var writer = new BinaryWriter(stream, Encoding.UTF8, false)) {
                         for (int x = 0; x < row; x++)
                         {
                             for (int y = 0; y < col; y++)
                             {
-                                writer.Write(ArrayWiki[x, y].ToString());
+                                writer.Write(ArrayWiki[x, y]);
                             }
                         }
                     }
@@ -278,7 +294,7 @@ namespace WikiApplication
             }
             catch (IOException ex)
             {
-                MessageBox.Show("", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
