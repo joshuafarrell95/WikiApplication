@@ -291,7 +291,8 @@ namespace WikiApplication
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
         private void SelectDefinition()
         {
-
+            string selectedItem = listViewWiki.SelectedItems[0].ToString();
+            int selectedIndex = listViewWiki.FindItemWithText(selectedItem);
         }
 
 
