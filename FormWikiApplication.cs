@@ -198,39 +198,32 @@ namespace WikiApplication
         #region 9.6
         private void BubbleSort()
         {
-            
-
-
-            for (int a = 0; a < row - 1; a++)
+            for (int xa = 0; xa < row; xa++)
             {
-                for (int b = 0; b < (row - 1); b++)
+                for (int xb = 0; xb < (row - 1); xb++)
                 {
-                    if (String.Compare(ArrayWiki[a, 0], ArrayWiki[b, 0]) > 0)
+                    if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
                     {
-                        Swap(a, b);
+                        for (int y = 0; y < col; y++)
+                        {
+                            Swap(xa, xb, y);
+                        }
                     }
                 }
             }
         }
 
-        private void Swap(int indx, int indy)
+        private void Swap(int indxa, int indxb, int loop)
         {
             try
             {     
                 //string[] temp = new string[row];
                 
-                String temp = ArrayWiki[indx, indy];
+                string temp = ArrayWiki[indxa, loop];
 
-                ArrayWiki[indx, indy] = ArrayWiki[indx + 1, indy];
+                ArrayWiki[indxa, loop] = ArrayWiki[indxb, loop];
 
-                ArrayWiki[indx + 1, indy] = temp;
-
-                
-
-
-
-
-
+                ArrayWiki[indxb, loop] = temp;
 
             }
             catch (IndexOutOfRangeException ex)
@@ -251,6 +244,7 @@ namespace WikiApplication
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
         private void DisplayList()
         {
+            BubbleSort();
             listViewWiki.Items.Clear();
             for(int x = 0; x < row; x++)
             {
@@ -258,7 +252,6 @@ namespace WikiApplication
                 lvi.SubItems.Add(ArrayWiki[x, 1].ToString());           /* Category */
                 listViewWiki.Items.Add(lvi);
             }
-            //BubbleSort();
         }
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
@@ -366,11 +359,5 @@ namespace WikiApplication
             DisplayList();
         }
         #endregion
-
-        private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
-        {
-            BubbleSort();
-            DisplayList();
-        }
     }
 }

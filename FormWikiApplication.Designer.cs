@@ -45,7 +45,6 @@
             this.labelStructure = new System.Windows.Forms.Label();
             this.labelDefinition = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.tempButtonSort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -204,29 +203,18 @@
             // statusStrip
             // 
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.statusStrip.Location = new System.Drawing.Point(0, 670);
+            this.statusStrip.Location = new System.Drawing.Point(0, 664);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip.Size = new System.Drawing.Size(850, 22);
+            this.statusStrip.Size = new System.Drawing.Size(850, 28);
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip";
-            // 
-            // tempButtonSort
-            // 
-            this.tempButtonSort.Location = new System.Drawing.Point(386, 278);
-            this.tempButtonSort.Name = "tempButtonSort";
-            this.tempButtonSort.Size = new System.Drawing.Size(112, 75);
-            this.tempButtonSort.TabIndex = 15;
-            this.tempButtonSort.Text = "SORT";
-            this.tempButtonSort.UseVisualStyleBackColor = true;
-            this.tempButtonSort.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TempButtonSort_MouseClick);
             // 
             // FormWikiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(850, 692);
-            this.Controls.Add(this.tempButtonSort);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.labelDefinition);
             this.Controls.Add(this.labelStructure);
@@ -270,7 +258,6 @@
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderCategory;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.Button tempButtonSort;
     }
 }
 
