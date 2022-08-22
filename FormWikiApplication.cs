@@ -221,7 +221,7 @@ namespace WikiApplication
             statusStrip.Items.Clear();
             if (textBoxSearch.Text != "")
             {
-                BinarySearch(textBoxSearch.ToString());
+                BinarySearch(textBoxSearch.Text);
             }
             else
             {
@@ -232,41 +232,37 @@ namespace WikiApplication
 
         private void BinarySearch(string searchString)
         {
-            statusStrip.Items.Clear();
-            if (string.IsNullOrEmpty(textBoxSearch.Text))
-            {
-                bool isItemFound = false;
-                int min = 0;
-                int max = row - 1;
+            bool isItemFound = false;
+            int min = 0;
+            int max = row - 1;
 
-                while (min <= max)
+            while (min <= max)
+            {
+                int mid = ((min + max) / 2);
+                if (searchString.CompareTo(ArrayWiki[mid, 0]) == 0)
                 {
-                    int mid = ((min + max) / 2);
-                    if (searchString.CompareTo(ArrayWiki[mid, 0]) == 0)
-                    {
-                        isItemFound = true;
-                        HighlightRecord(mid);
-                        break;
-                    }
-                    else if (searchString.CompareTo(ArrayWiki[mid, 0]) < 0)
-                    {
-                        max = mid - 1;
-                    }
-                    else
-                    {
-                        min = mid + 1;
-                    }
+                    isItemFound = true;
+                    HighlightRecord(mid);
+                    break;
                 }
-                if(!isItemFound)
+                else if (searchString.CompareTo(ArrayWiki[mid, 0]) < 0)
                 {
-                    MessageBox.Show("Record " + searchString + " not found.", "Search unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    max = mid - 1;
                 }
                 else
                 {
-                    statusStrip.Items.Add("Record " + searchString + "found and highlighted.");
+                    min = mid + 1;
                 }
-                textBoxSearch.Clear();
             }
+            if(!isItemFound)
+            {
+                MessageBox.Show("Record " + searchString + " not found.", "Search unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                statusStrip.Items.Add("Record " + searchString + " found and highlighted.");
+            }
+            textBoxSearch.Clear();
         }
 
         private void HighlightRecord(int recordIndx)
