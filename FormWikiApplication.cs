@@ -263,15 +263,18 @@ namespace WikiApplication
             saveFileDialog.InitialDirectory = Application.StartupPath;
             saveFileDialog.DefaultExt = "dat";
             saveFileDialog.ShowDialog();
-            string fileName = saveFileDialog.FileName;
             
-            if(saveFileDialog.FileName != "")
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SaveData(fileName);
-            }
-            else
-            {
-                SaveData(DEFAULT_FILE_NAME);
+                string fileName = saveFileDialog.FileName;
+                if (saveFileDialog.FileName != "")
+                {
+                    SaveData(fileName);
+                }
+                else
+                {
+                    SaveData(DEFAULT_FILE_NAME);
+                }
             }
         }
 
@@ -302,12 +305,43 @@ namespace WikiApplication
         // ensure the user has the option to select an alternative file.Use a file stream and BinaryReader to complete this task.
         private void ButtonLoad_MouseClick(object sender, MouseEventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Filter = "dat files (*.dat)|*.dat";
+            openFileDialog.Title = "Open a DAT file";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                LoadData(openFileDialog.FileName);
+            }
         }
 
-        private void LoadData()
+        private void LoadData(string loadFileName)
         {
-
+            try
+            {
+                using (Stream stream = File.Open(loadFileName, FileMode.Open))
+                {
+                    using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
+                    {
+                        {
+                            int x = 0;
+                            Array.Clear(ArrayWiki, 0, ArrayWiki.Length);
+                            while (stream.Position < stream.Length)
+                            {
+                                for (int y = 0; y < col; y++)
+                                {
+                                    ArrayWiki[x, y] = reader.ReadString();
+                                }
+                                x++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("File " + loadFileName + " was unable to be loaded due to an IO Error. Please try again.", "Load IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
