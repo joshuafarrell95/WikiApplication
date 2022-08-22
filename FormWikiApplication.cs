@@ -252,8 +252,10 @@ namespace WikiApplication
 
         }
 
+
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
+        #region 9.10
         const string DEFAULT_FILE_NAME = "definitions.dat";
 
         private void ButtonSave_MouseClick(object sender, MouseEventArgs e)
@@ -302,9 +304,11 @@ namespace WikiApplication
                 MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
 
         // 9.11	Create a LOAD button that will read the information from a binary file called definitions.dat into the 2D array,
         // ensure the user has the option to select an alternative file.Use a file stream and BinaryReader to complete this task.
+        #region 9.11
         private void ButtonLoad_MouseClick(object sender, MouseEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -346,6 +350,7 @@ namespace WikiApplication
             }
             DisplayList();
         }
+        #endregion
 
         private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
         {
