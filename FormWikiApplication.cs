@@ -38,7 +38,19 @@ namespace WikiApplication
             {
                 for (int y = 0; y < col; y++) {
                     //ArrayWiki[x, y] = "";                                 /* Production code */
-                    ArrayWiki[x, 0] = random.Next(1, row).ToString();       /* Testing code */
+                    //ArrayWiki[x, 0] = random.Next(1, row).ToString();       /* Testing code */
+                    ArrayWiki[0, 0] = "x";
+                    ArrayWiki[1, 0] = "d";
+                    ArrayWiki[2, 0] = "c";
+                    ArrayWiki[3, 0] = "z";
+                    ArrayWiki[4, 0] = "a";
+                    ArrayWiki[5, 0] = "b";
+                    ArrayWiki[6, 0] = "f";
+                    ArrayWiki[7, 0] = "e";
+                    ArrayWiki[8, 0] = "h";
+                    ArrayWiki[9, 0] = "g";
+                    ArrayWiki[10, 0] = "j";
+                    ArrayWiki[11, 0] = "i";
                     ArrayWiki[x, 1] = random.Next(1, row).ToString();
                     ArrayWiki[x, 2] = random.Next(1, row).ToString();
                     ArrayWiki[x, 3] = random.Next(1, row).ToString();
@@ -183,27 +195,19 @@ namespace WikiApplication
 
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
+        #region 9.6
         private void BubbleSort()
         {
+            
+
+
             for (int a = 0; a < row - 1; a++)
             {
-                
                 for (int b = 0; b < (row - 1); b++)
                 {
-                    if (ArrayWiki[a, 0].CompareTo(ArrayWiki[b, 0]) > 0)
+                    if (String.Compare(ArrayWiki[a, 0], ArrayWiki[b, 0]) > 0)
                     {
-                        for (int y = 0; y < col; y++)
-                        {
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            Swap(a, b);
-                        }
+                        Swap(a, b);
                     }
                 }
             }
@@ -213,11 +217,21 @@ namespace WikiApplication
         {
             try
             {     
+                //string[] temp = new string[row];
+                
                 String temp = ArrayWiki[indx, indy];
 
                 ArrayWiki[indx, indy] = ArrayWiki[indx + 1, indy];
 
                 ArrayWiki[indx + 1, indy] = temp;
+
+                
+
+
+
+
+
+
             }
             catch (IndexOutOfRangeException ex)
             {
@@ -225,6 +239,7 @@ namespace WikiApplication
             }
             
         }
+        #endregion
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
         // add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods),
@@ -355,6 +370,7 @@ namespace WikiApplication
         private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
         {
             BubbleSort();
+            DisplayList();
         }
     }
 }
