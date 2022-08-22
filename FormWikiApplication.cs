@@ -217,14 +217,11 @@ namespace WikiApplication
         {
             try
             {     
-                //string[] temp = new string[row];
-                
                 string temp = ArrayWiki[indxa, loop];
 
                 ArrayWiki[indxa, loop] = ArrayWiki[indxb, loop];
 
                 ArrayWiki[indxb, loop] = temp;
-
             }
             catch (IndexOutOfRangeException ex)
             {
