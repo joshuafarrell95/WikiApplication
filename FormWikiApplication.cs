@@ -215,10 +215,67 @@ namespace WikiApplication
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
         // add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods),
-        private void BinarySearch()
+        #region 9.7
+        private void ButtonSearch_MouseClick(object sender, MouseEventArgs e)
         {
-
+            statusStrip.Items.Clear();
+            if (textBoxSearch.Text != "")
+            {
+                BinarySearch(textBoxSearch.ToString());
+            }
+            else
+            {
+                statusStrip.Items.Add("Please enter a search string in the search textbox");
+                textBoxSearch.Focus();
+            }
         }
+
+        private void BinarySearch(string searchString)
+        {
+            statusStrip.Items.Clear();
+            if (string.IsNullOrEmpty(textBoxSearch.Text))
+            {
+                bool isItemFound = false;
+                int min = 0;
+                int max = row - 1;
+
+                while (min <= max)
+                {
+                    int mid = ((min + max) / 2);
+                    if (searchString.CompareTo(ArrayWiki[mid, 0]) == 0)
+                    {
+                        isItemFound = true;
+                        HighlightRecord(mid);
+                        break;
+                    }
+                    else if (searchString.CompareTo(ArrayWiki[mid, 0]) < 0)
+                    {
+                        max = mid - 1;
+                    }
+                    else
+                    {
+                        min = mid + 1;
+                    }
+                }
+                if(!isItemFound)
+                {
+                    MessageBox.Show("Record " + searchString + " not found.", "Search unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    statusStrip.Items.Add("Record " + searchString + "found and highlighted.");
+                }
+                textBoxSearch.Clear();
+            }
+        }
+
+        private void HighlightRecord(int recordIndx)
+        {
+            listViewWiki.Refresh();
+            listViewWiki.Items[recordIndx].Selected = true;
+            listViewWiki.Select();
+        }
+        #endregion
 
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
         #region 9.8

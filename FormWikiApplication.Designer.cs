@@ -237,6 +237,7 @@
             this.buttonSearch.TabIndex = 17;
             this.buttonSearch.Text = "SEARCH";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ButtonSearch_MouseClick);
             // 
             // FormWikiApplication
             // 
