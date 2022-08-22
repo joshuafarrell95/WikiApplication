@@ -40,6 +40,8 @@ namespace WikiApplication
                     //ArrayWiki[x, y] = "";                                 /* Production code */
                     ArrayWiki[x, 0] = random.Next(1, row).ToString();       /* Testing code */
                     ArrayWiki[x, 1] = random.Next(1, row).ToString();
+                    ArrayWiki[x, 2] = random.Next(1, row).ToString();
+                    ArrayWiki[x, 3] = random.Next(1, row).ToString();
                 }
             }
             DisplayList();
@@ -262,7 +264,6 @@ namespace WikiApplication
             saveFileDialog.Title = "Save a DAT file";
             saveFileDialog.InitialDirectory = Application.StartupPath;
             saveFileDialog.DefaultExt = "dat";
-            saveFileDialog.ShowDialog();
             
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -284,7 +285,8 @@ namespace WikiApplication
             {
                 using (Stream stream = File.Open(saveFileName, FileMode.Create))
                 {
-                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false)) {
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                    {
                         for (int x = 0; x < row; x++)
                         {
                             for (int y = 0; y < col; y++)
@@ -342,6 +344,7 @@ namespace WikiApplication
             {
                 MessageBox.Show("File " + loadFileName + " was unable to be loaded due to an IO Error. Please try again.", "Load IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            DisplayList();
         }
 
         private void TempButtonSort_MouseClick(object sender, MouseEventArgs e)
