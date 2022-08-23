@@ -277,7 +277,6 @@ namespace WikiApplication
         #region 9.8
         private void DisplayList()
         {
-            BubbleSort();
             listViewWiki.Items.Clear();
             for(int x = 0; x < row; x++)
             {
@@ -402,7 +401,5 @@ namespace WikiApplication
             DisplayList();
         }
         #endregion
-
-        
     }
 }
