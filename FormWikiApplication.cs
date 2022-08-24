@@ -112,7 +112,7 @@ namespace WikiApplication
             statusStrip.Items.Clear();
             try
             {
-                int selectedIndex = listViewWiki.SelectedIndices[0];
+                int selectedIndex = GetSelectedIndex();
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
                     TextBoxToArray(selectedIndex);
@@ -128,6 +128,12 @@ namespace WikiApplication
             }
             DisplayList();
         }
+
+        private int GetSelectedIndex()
+        {
+            int selectedIndex = listViewWiki.SelectedIndices[0];
+            return selectedIndex;
+        }
         #endregion
 
         // 9.4	Create a DELETE button that removes all the information from a single entry of the array;
@@ -135,15 +141,15 @@ namespace WikiApplication
         #region 9.4
         private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
         {
-            statusStrip.Items.Clear();
             DeleteInformation();
         }
 
         private void DeleteInformation()
         {
+            statusStrip.Items.Clear();
             try
             {
-                int selectedIndex = listViewWiki.SelectedIndices[0];
+                int selectedIndex = GetSelectedIndex();
 
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
@@ -152,7 +158,6 @@ namespace WikiApplication
                     if (userDecision == DialogResult.OK)
                     {
                         InitialiseArray(selectedIndex);
-                        BubbleSort();
                     }
                 }
                 else
@@ -198,40 +203,50 @@ namespace WikiApplication
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
         #region 9.6
+        //private void BubbleSort()
+        //{
+        //    for (int xa = 0; xa < row; xa++)
+        //    {
+        //        for (int xb = 0; xb < (row - 1); xb++)
+        //        {
+        //            if (!(String.IsNullOrEmpty(ArrayWiki[xa, 0])))
+        //            {
+        //                if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
+        //                {
+        //                    for (int y = 0; y < col; y++)
+        //                    {
+        //                        Swap(xa, xb, y);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void Swap(int indxa, int indxb, int indy)
+        //{
+        //    try
+        //    {
+        //        string temp = ArrayWiki[indxa, indy];
+
+        //        ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
+
+        //        ArrayWiki[indxb, indy] = temp;
+        //    }
+        //    catch (IndexOutOfRangeException ex)
+        //    {
+
+        //    }
+        //}
+
         private void BubbleSort()
         {
-            for (int xa = 0; xa < row; xa++)
-            {
-                for (int xb = 0; xb < (row - 1); xb++)
-                {
-                    if (!(String.IsNullOrWhiteSpace(ArrayWiki[xa, 0])))
-                    {
-                        if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
-                        {
-                            for (int y = 0; y < col; y++)
-                            {
-                                Swap(xa, xb, y);
-                            }
-                        }
-                    }
-                }
-            }
+
         }
 
-        private void Swap(int indxa, int indxb, int indy)
+        private void Swap()
         {
-            try
-            {
-                string temp = ArrayWiki[indxa, indy];
 
-                ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
-
-                ArrayWiki[indxb, indy] = temp;
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-
-            }
         }
         #endregion
 
@@ -335,7 +350,6 @@ namespace WikiApplication
             saveFileDialog.Title = "Save a DAT file";
             saveFileDialog.InitialDirectory = Application.StartupPath;
             saveFileDialog.DefaultExt = "dat";
-            
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = saveFileDialog.FileName;
