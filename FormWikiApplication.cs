@@ -184,32 +184,34 @@ namespace WikiApplication
             {
                 for (int xb = 0; xb < (row - 1); xb++)
                 {
-                    if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
+                    if (!(String.IsNullOrWhiteSpace(ArrayWiki[xa, 0])))
                     {
-                        for (int y = 0; y < col; y++)
+                        if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
                         {
-                            Swap(xa, xb, y);
+                            for (int y = 0; y < col; y++)
+                            {
+                                Swap(xa, xb, y);
+                            }
                         }
                     }
                 }
             }
         }
 
-        private void Swap(int indxa, int indxb, int loop)
+        private void Swap(int indxa, int indxb, int indy)
         {
             try
-            {     
-                string temp = ArrayWiki[indxa, loop];
+            {
+                string temp = ArrayWiki[indxa, indy];
 
-                ArrayWiki[indxa, loop] = ArrayWiki[indxb, loop];
+                ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
 
-                ArrayWiki[indxb, loop] = temp;
+                ArrayWiki[indxb, indy] = temp;
             }
             catch (IndexOutOfRangeException ex)
             {
                 
             }
-            
         }
         #endregion
 
@@ -402,7 +404,5 @@ namespace WikiApplication
             DisplayList();
         }
         #endregion
-
-        
     }
 }
