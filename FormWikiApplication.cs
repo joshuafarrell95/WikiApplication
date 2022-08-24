@@ -214,7 +214,6 @@ namespace WikiApplication
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
         #region 9.6
-        /* KNOWN WORKING CODE THAT HAS PROBLEMS */
         private void BubbleSort()
         {
             for (int xa = 0; xa < row; xa++)
