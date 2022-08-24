@@ -198,6 +198,7 @@
             this.statusStrip.Location = new System.Drawing.Point(0, 428);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(721, 22);
+            this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -253,7 +254,9 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormWikiApplication";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Wiki Application";
             this.Load += new System.EventHandler(this.FormWikiApplication_Load);
             this.ResumeLayout(false);

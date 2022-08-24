@@ -66,7 +66,17 @@ namespace WikiApplication
             {
                 if ((ArrayWiki[x, 0] == "") && !flag)
                 {
-                    TextBoxToArray(x);
+                    if (GetSelectedIndex() != -1)
+                    {
+                        if (MessageBox.Show("Are you sure?", "TEST", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            TextBoxToArray(x);
+                        }
+                    }
+                    else
+                    {
+                        TextBoxToArray(x);
+                    }
                     flag = true;
                     break;
                 }
@@ -131,7 +141,15 @@ namespace WikiApplication
 
         private int GetSelectedIndex()
         {
-            int selectedIndex = listViewWiki.SelectedIndices[0];
+            int selectedIndex;
+            try
+            {
+                selectedIndex = listViewWiki.SelectedIndices[0];
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return -1;
+            }
             return selectedIndex;
         }
         #endregion
