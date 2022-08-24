@@ -203,6 +203,44 @@ namespace WikiApplication
         // 9.6	Write the code for a Bubble Sort method to sort the 2D array by Name ascending,
         // ensure you use a separate swap method that passes the array element to be swapped(do not use any built-in array methods),
         #region 9.6
+        /* KNOWN WORKING CODE THAT HAS PROBLEMS */
+        private void BubbleSort()
+        {
+            for (int xa = 0; xa < row; xa++)
+            {
+                for (int xb = 0; xb < (row - 1); xb++)
+                {
+                    if (!(String.IsNullOrEmpty(ArrayWiki[xa, 0])))
+                    {
+                        if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
+                        {
+                            for (int y = 0; y < col; y++)
+                            {
+                                Swap(xa, xb, y);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Swap(int indxa, int indxb, int indy)
+        {
+            try
+            {
+                string temp = ArrayWiki[indxa, indy];
+
+                ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
+
+                ArrayWiki[indxb, indy] = temp;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+
+            }
+        }
+
+        /* COPY OF KNOWN WORKING CODE THAT HAS PROBLEMS */
         //private void BubbleSort()
         //{
         //    for (int xa = 0; xa < row; xa++)
@@ -239,15 +277,44 @@ namespace WikiApplication
         //    }
         //}
 
-        private void BubbleSort()
-        {
+        /* FIX ATTEMPT 1 */
+        //private void BubbleSort()
+        //{
+        //    bool flag = true;
 
-        }
+        //    for (int x = 1; x <= (row - 1) && flag; x++)
+        //    {
+        //        flag = false;
+        //        for (int i = 0; i < row; i++)
+        //        {
+        //            if (!(String.IsNullOrWhiteSpace(ArrayWiki[x, 0])))
+        //            {
+        //                if (String.Compare(ArrayWiki[x + 1, 0], ArrayWiki[x, 1]) == 0)
+        //                {
+        //                    flag = Swap(x);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
-        private void Swap()
-        {
+        //private bool Swap(int indx)
+        //{
+        //    try
+        //    {
+        //        for (int indy = 0; indy < col; indy++)
+        //        {
+        //            string temp = ArrayWiki[indx, indy];
+        //            ArrayWiki[indx, indy] = ArrayWiki[indx + 1, indy];
+        //            ArrayWiki[indx + 1, indy] = temp;
+        //        }
+        //    }
+        //    catch (IndexOutOfRangeException ex)
+        //    {
 
-        }
+        //    }
+        //    return true;
+        //}
         #endregion
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
@@ -304,6 +371,10 @@ namespace WikiApplication
 
         private void HighlightRecord(int recordIndx)
         {
+            for (int x = 0; x < row; x++)
+            {
+                listViewWiki.Items[x].Selected = false;         /* Unhighlights any record */
+            }
             listViewWiki.Refresh();
             listViewWiki.Items[recordIndx].Selected = true;
             listViewWiki.Select();
