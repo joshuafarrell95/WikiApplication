@@ -124,6 +124,7 @@ namespace WikiApplication
             }
             catch (ArgumentOutOfRangeException ex)
             {
+                Trace.TraceInformation(ex.ToString());
                 statusStrip.Items.Add("Please select a valid record to edit");
             }
             DisplayList();
@@ -138,6 +139,7 @@ namespace WikiApplication
             }
             catch (ArgumentOutOfRangeException ex)
             {
+                Trace.TraceInformation(ex.ToString());
                 return -1;
             }
             return selectedIndex;
@@ -175,6 +177,7 @@ namespace WikiApplication
             }
             catch (ArgumentOutOfRangeException ex)
             {
+                Trace.TraceInformation(ex.ToString());
                 statusStrip.Items.Add("Please select a valid record to delete");
             }
             DisplayList();
@@ -246,7 +249,7 @@ namespace WikiApplication
             }
             catch (IndexOutOfRangeException ex)
             {
-
+                Trace.TraceInformation(ex.ToString());
             }
         }
         #endregion
@@ -389,6 +392,7 @@ namespace WikiApplication
             }
             catch (IOException ex)
             {
+                Trace.TraceInformation(ex.ToString());
                 MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -434,6 +438,7 @@ namespace WikiApplication
             }
             catch (IOException ex)
             {
+                Trace.TraceInformation(ex.ToString());
                 MessageBox.Show("File " + loadFileName + " was unable to be loaded due to an IO Error. Please try again.", "Load IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             DisplayList();
