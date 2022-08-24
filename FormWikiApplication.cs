@@ -32,13 +32,21 @@ namespace WikiApplication
 
         private void InitialiseArray()
         {
+            statusStrip.Items.Clear();
             for (int x = 0; x < row; x++)
             {
-                for (int y = 0; y < col; y++) {
-                    ArrayWiki[x, y] = "";
-                }
+                InitialiseArray(x);
             }
+            statusStrip.Items.Add("Wiki Array initialised and ready to use");
             DisplayList();
+        }
+
+        private void InitialiseArray(int x)
+        {
+            for (int y = 0; y < col; y++)
+            {
+                ArrayWiki[x, y] = "";
+            }
         }
         #endregion
 
@@ -46,22 +54,19 @@ namespace WikiApplication
         #region 9.2
         private void ButtonAdd_MouseClick(object sender, MouseEventArgs e)
         {
-            statusStrip.Items.Clear();
             AddInformation();
         }
 
         private void AddInformation()
         {
+            statusStrip.Items.Clear();
             bool flag = false;
             
             for (int x = 0; x < row; x++)
             {
                 if ((ArrayWiki[x, 0] == "") && !flag)
                 {
-                    ArrayWiki[x, 0] = textBoxDataStructureName.Text;
-                    ArrayWiki[x, 1] = textBoxCategory.Text;
-                    ArrayWiki[x, 2] = textBoxStructure.Text;
-                    ArrayWiki[x, 3] = textBoxDefinition.Text;
+                    TextBoxToArray(x);
                     flag = true;
                     break;
                 }
@@ -71,7 +76,27 @@ namespace WikiApplication
                 MessageBox.Show("You must delete a record before adding a new record.",
                     "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                statusStrip.Items.Add("Record added to Wiki Array");
+            }
             DisplayList();
+        }
+
+        private void TextBoxToArray(int indx)
+        {
+            ArrayWiki[indx, 0] = textBoxDataStructureName.Text;
+            ArrayWiki[indx, 1] = textBoxCategory.Text;
+            ArrayWiki[indx, 2] = textBoxStructure.Text;
+            ArrayWiki[indx, 3] = textBoxDefinition.Text;
+        }
+
+        private void ArrayToTextBox(int indx)
+        {
+            textBoxDataStructureName.Text = ArrayWiki[indx, 0];
+            textBoxCategory.Text = ArrayWiki[indx, 1];
+            textBoxStructure.Text = ArrayWiki[indx, 2];
+            textBoxDefinition.Text = ArrayWiki[indx, 3];
         }
         #endregion
 
@@ -79,21 +104,18 @@ namespace WikiApplication
         #region 9.3
         private void ButtonEdit_MouseClick(object sender, MouseEventArgs e)
         {
-            statusStrip.Items.Clear();
             EditInformation();
         }
 
         private void EditInformation()
         {
+            statusStrip.Items.Clear();
             try
             {
                 int selectedIndex = listViewWiki.SelectedIndices[0];
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
-                    ArrayWiki[selectedIndex, 0] = textBoxDataStructureName.Text;
-                    ArrayWiki[selectedIndex, 1] = textBoxCategory.Text;
-                    ArrayWiki[selectedIndex, 2] = textBoxStructure.Text;
-                    ArrayWiki[selectedIndex, 3] = textBoxDefinition.Text;
+                    TextBoxToArray(selectedIndex);
                 }
                 else
                 {
@@ -129,10 +151,8 @@ namespace WikiApplication
                         "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if (userDecision == DialogResult.OK)
                     {
-                        ArrayWiki[selectedIndex, 0] = "";       /* Data Structure Text */
-                        ArrayWiki[selectedIndex, 1] = "";       /* Category Text */
-                        ArrayWiki[selectedIndex, 2] = "";       /* Structure Text */
-                        ArrayWiki[selectedIndex, 3] = "";       /* Description Text */
+                        InitialiseArray(selectedIndex);
+                        BubbleSort();
                     }
                 }
                 else
@@ -210,7 +230,7 @@ namespace WikiApplication
             }
             catch (IndexOutOfRangeException ex)
             {
-                
+
             }
         }
         #endregion
@@ -299,11 +319,7 @@ namespace WikiApplication
         private void SelectDefinition()
         {
             int selectedIndex = listViewWiki.SelectedIndices[0];
-
-            textBoxDataStructureName.Text = ArrayWiki[selectedIndex, 0];
-            textBoxCategory.Text = ArrayWiki[selectedIndex, 1];
-            textBoxStructure.Text = ArrayWiki[selectedIndex, 2];
-            textBoxDefinition.Text = ArrayWiki[selectedIndex, 3];
+            ArrayToTextBox(selectedIndex);
         }
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
