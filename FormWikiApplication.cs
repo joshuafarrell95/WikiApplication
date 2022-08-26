@@ -152,24 +152,48 @@ namespace WikiApplication
         #region 9.4
         private void ButtonDelete_MouseClick(object sender, MouseEventArgs e)
         {
-            DeleteInformation();
+            statusStrip.Items.Clear();
+            int selectedIndex = GetSelectedIndex();
+            var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
+                        "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (userDecision == DialogResult.Yes) {
+                DeleteInformation(selectedIndex);
+            }
+            else
+            {
+                statusStrip.Items.Add("Record not deleted");
+            }
+        }
+
+        private void ListViewWiki_DoubleClick(object sender, EventArgs e)
+        {
+            var userDecision = MessageBox.Show("Are you sure you want to delete all records?", "Confirm all record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+
+            if (userDecision == DialogResult.Yes)
+            {
+                DeleteInformation();
+                statusStrip.Items.Clear();                          /* Deletes existing messages from DeleteInformation() */
+                statusStrip.Items.Add("All records deleted");
+            }
         }
 
         private void DeleteInformation()
         {
+            for (int x = 0; x < row; x++)
+            {
+                DeleteInformation(x);
+            }
+        }
+
+        private void DeleteInformation(int selectedIndex)
+        {
             statusStrip.Items.Clear();
             try
             {
-                int selectedIndex = GetSelectedIndex();
-
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
-                    var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?", 
-                        "Confirm record deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (userDecision == DialogResult.OK)
-                    {
-                        InitialiseArray(selectedIndex);
-                    }
+                    InitialiseArray(selectedIndex);
                 }
                 else
                 {
@@ -321,7 +345,7 @@ namespace WikiApplication
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
         #region 9.8
         private void DisplayList()
-        {
+        { 
             listViewWiki.Items.Clear();
             for(int x = 0; x < row; x++)
             {
@@ -451,7 +475,7 @@ namespace WikiApplication
         #region 9.12
         private void TextBoxDataStucture_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter the Data Structure Name here, or double click this Text Box to clear all Text Boxes.", textBoxDataStructureName);
+            DisplayToolTip("Enter the Data Structure Name here, or double click on this text box to clear all text boxes.", textBoxDataStructureName);
         }
 
         private void TextBoxCategory_MouseHover(object sender, EventArgs e)
@@ -476,12 +500,13 @@ namespace WikiApplication
 
         private void ButtonSearch_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter a search term in the Search textbox, then click on this BUTTON.", buttonSearch);
+            DisplayToolTip("Enter a search term in the Search textbox, then click on this button.", buttonSearch);
         }
 
         private void ListViewWiki_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Click on a record to display its contents.", listViewWiki);
+            DisplayToolTip("Click on a record to display its contents.\r\n" +
+                "Double click to delete all records. ", listViewWiki);
         }
 
         private void DisplayToolTip(string message, TextBox textbox)

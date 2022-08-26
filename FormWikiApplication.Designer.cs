@@ -122,6 +122,7 @@
             this.listViewWiki.TabIndex = 5;
             this.listViewWiki.UseCompatibleStateImageBehavior = false;
             this.listViewWiki.View = System.Windows.Forms.View.Details;
+            this.listViewWiki.DoubleClick += new System.EventHandler(this.ListViewWiki_DoubleClick);
             this.listViewWiki.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListViewWiki_MouseClick);
             this.listViewWiki.MouseHover += new System.EventHandler(this.ListViewWiki_MouseHover);
             // 
