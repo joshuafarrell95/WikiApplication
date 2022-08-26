@@ -28,6 +28,7 @@ namespace WikiApplication
         private void FormWikiApplication_Load(object sender, EventArgs e)
         {
             InitialiseArray();
+            EnableDevButtons(false);
         }
 
         private void InitialiseArray()
@@ -442,5 +443,90 @@ namespace WikiApplication
             DisplayList();
         }
         #endregion
+
+        // 9.12	All code is required to be adequately commented, and each interaction must have suitable error trapping and/or feedback.
+        // All methods must utilise the appropriate Dialog Boxes, Message Boxes, etc to ensure fully user functionality.
+        // Map the programming criteria and features to your code/methods by adding comments above the method signatures.
+        // Ensure your code is compliant with the CITEMS coding standards (refer http://www.citems.com.au/).
+        #region 9.12
+        private void TextBoxDataStucture_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter the Data Structure Name here, or double click this Text Box to clear all Text Boxes.", textBoxDataStructureName);
+        }
+
+        private void TextBoxCategory_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter the Category here.", textBoxCategory);
+        }
+
+        private void TextBoxStructure_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter the Structure here.", textBoxStructure);
+        }
+
+        private void TextBoxDefinition_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter the Definition here.", textBoxDefinition);
+        }
+
+        private void TextBoxSearch_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter a search term here, then click on the SEARCH button", textBoxSearch);
+        }
+
+        private void ButtonSearch_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Enter a search term in the Search textbox, then click on this BUTTON.", buttonSearch);
+        }
+
+        private void ListViewWiki_MouseHover(object sender, EventArgs e)
+        {
+            DisplayToolTip("Click on a record to display its contents.", listViewWiki);
+        }
+
+        private void DisplayToolTip(string message, TextBox textbox)
+        {
+            toolTip.SetToolTip(textbox, message);
+        }
+
+        private void DisplayToolTip(string message, ListView listView)
+        {
+            toolTip.SetToolTip(listView, message);
+        }
+
+        private void DisplayToolTip(string message, Button button)
+        {
+            toolTip.SetToolTip(button, message);
+        }
+        #endregion
+
+        private void checkBoxDeveloperMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDeveloperMode.Checked)
+            {
+                EnableDevButtons(true);
+            }
+            else
+            {
+                EnableDevButtons(false);
+            }
+        }
+
+        private void EnableDevButtons(bool state)
+        {
+            if (state)
+            {
+                buttonSort.Enabled = true;
+            }
+            else
+            {
+                buttonSort.Enabled = false;
+            }
+        }
+
+        private void ButtonSort_MouseClick(object sender, MouseEventArgs e)
+        {
+            BubbleSort();
+        }
     }
 }
