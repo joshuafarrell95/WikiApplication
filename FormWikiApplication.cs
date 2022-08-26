@@ -168,13 +168,18 @@ namespace WikiApplication
 
         private void ListViewWiki_DoubleClick(object sender, EventArgs e)
         {
+            statusStrip.Items.Clear();
             var userDecision = MessageBox.Show("Are you sure you want to delete all records?", "Confirm all record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
 
             if (userDecision == DialogResult.Yes)
             {
                 DeleteInformation();
-                statusStrip.Items.Clear();                          /* Deletes existing messages from DeleteInformation() */
+                statusStrip.Items.Clear();                          /* Required - Deletes existing messages from DeleteInformation() */
                 statusStrip.Items.Add("All records deleted");
+            }
+            else
+            {
+                statusStrip.Items.Add("Deletion cancelled, no records affected");
             }
         }
 
