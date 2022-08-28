@@ -174,7 +174,7 @@ namespace WikiApplication
             if (userDecision == DialogResult.Yes)
             {
                 DeleteInformation();
-                statusStrip.Items.Clear();                          /* Required - Deletes existing messages from DeleteInformation() */
+                statusStrip.Items.Clear();                          /* Required to delete existing messages from DeleteInformation() */
                 statusStrip.Items.Add("All records deleted");
             }
             else
@@ -210,6 +210,7 @@ namespace WikiApplication
                 Trace.TraceInformation(ex.ToString());
                 statusStrip.Items.Add("Please select a valid record to delete");
             }
+            BubbleSort();
             DisplayList();
         }
         #endregion
@@ -246,41 +247,70 @@ namespace WikiApplication
         #region 9.6
         private void BubbleSort()
         {
-            for (int xa = 0; xa < row; xa++)
+            BubbleSort(ArrayWiki);
+        }
+
+        private void BubbleSort(string[,] arrayTwoDim)
+        {
+            for (int xi = 0; xi < row; xi++)
             {
-                for (int xb = 0; xb < row; xb++)
+                for (int xj = 0; xj < row - 1; xj++)
                 {
-                    if (!(String.IsNullOrEmpty(ArrayWiki[xa, 0])))
+                    if (arrayTwoDim[xj, 0].CompareTo(arrayTwoDim[xj + 1, 0]) > 0)
                     {
-                        if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
-                        {
-                            for (int y = 0; y < col; y++)
-                            {
-                                Swap(xa, xb, y);
-                            }
-                        }
+                        Sort(arrayTwoDim, xj);
                     }
                 }
             }
         }
 
-        private void Swap(int indxa, int indxb, int indy)
+        private void Sort(string[,] arrayTwoDim, int indx)
         {
-            try
+            for (int indy = 0; indy < col; indy++)
             {
-                string temp;
-
-                temp = ArrayWiki[indxa, indy];
-
-                ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
-
-                ArrayWiki[indxb, indy] = temp;
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                Trace.TraceInformation(ex.ToString());
+                string temp = arrayTwoDim[indx, indy];
+                arrayTwoDim[indx, indy] = arrayTwoDim[indx + 1, indy];
+                arrayTwoDim[indx + 1, indy] = temp;
             }
         }
+
+        //private void BubbleSort()
+        //{
+        //    for (int xa = 0; xa < row; xa++)
+        //    {
+        //        for (int xb = 0; xb < row; xb++)
+        //        {
+        //            if (!(String.IsNullOrEmpty(ArrayWiki[xa, 0])))
+        //            {
+        //                if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
+        //                {
+        //                    for (int y = 0; y < col; y++)
+        //                    {
+        //                        Swap(xa, xb, y);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void Swap(int indxa, int indxb, int indy)
+        //{
+        //    try
+        //    {
+        //        string temp;
+
+        //        temp = ArrayWiki[indxa, indy];
+
+        //        ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
+
+        //        ArrayWiki[indxb, indy] = temp;
+        //    }
+        //    catch (IndexOutOfRangeException ex)
+        //    {
+        //        Trace.TraceInformation(ex.ToString());
+        //    }
+        //}
         #endregion
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
@@ -557,6 +587,7 @@ namespace WikiApplication
         private void ButtonSort_MouseClick(object sender, MouseEventArgs e)
         {
             BubbleSort();
+            DisplayList();
         }
     }
 }
