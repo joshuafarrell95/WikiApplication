@@ -257,6 +257,7 @@ namespace WikiApplication
 
         private void BubbleSort(string[,] arrayTwoDim)
         {
+            ReplaceString(arrayTwoDim, "", "~");
             for (int xi = 0; xi < row; xi++)
             {
                 for (int xj = 0; xj < row - 1; xj++)
@@ -270,31 +271,26 @@ namespace WikiApplication
                     }
                 }
             }
-            ReplaceTilde(arrayTwoDim);
+            ReplaceString(arrayTwoDim, "~", "");
         }
 
         private void Sort(string[,] arrayTwoDim, int indx)
         {
             for (int indy = 0; indy < col; indy++)
             {
-                if (arrayTwoDim[indx, 0] == "")
-                {
-                    arrayTwoDim[indx, 0] = "~";
-                }
-
                 string temp = arrayTwoDim[indx, indy];
                 arrayTwoDim[indx, indy] = arrayTwoDim[indx + 1, indy];
                 arrayTwoDim[indx + 1, indy] = temp;
             }
         }
 
-        private void ReplaceTilde(string[,] arrayTwoDim)
+        private void ReplaceString(string[,] arrayTwoDim, string sa, string sb)
         {
             for (int indx = 0; indx < row; indx++)
             {
-                if (arrayTwoDim[indx, 0] == "~")
+                if (arrayTwoDim[indx, 0] == sa)
                 {
-                    arrayTwoDim[indx, 0] = "";
+                    arrayTwoDim[indx, 0] = sb;
                 }
             }
         }
