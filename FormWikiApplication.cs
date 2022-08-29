@@ -44,9 +44,14 @@ namespace WikiApplication
 
         private void InitialiseArray(int x)
         {
+            InitialiseArray(x, "");
+        }
+
+        private void InitialiseArray(int x, string s)
+        {
             for (int y = 0; y < col; y++)
             {
-                ArrayWiki[x, y] = "";
+                ArrayWiki[x, y] = s;
             }
         }
         #endregion
@@ -256,61 +261,43 @@ namespace WikiApplication
             {
                 for (int xj = 0; xj < row - 1; xj++)
                 {
-                    if (arrayTwoDim[xj, 0].CompareTo(arrayTwoDim[xj + 1, 0]) > 0)
+                    if (!(String.IsNullOrWhiteSpace(arrayTwoDim[xj, 0])))
                     {
-                        Sort(arrayTwoDim, xj);
+                        if (String.CompareOrdinal(arrayTwoDim[xj, 0], arrayTwoDim[xj + 1, 0]) > 0)
+                        {
+                            Sort(arrayTwoDim, xj);
+                        }
                     }
                 }
             }
+            ReplaceTilde(arrayTwoDim);
         }
 
         private void Sort(string[,] arrayTwoDim, int indx)
         {
             for (int indy = 0; indy < col; indy++)
             {
+                if (arrayTwoDim[indx, 0] == "")
+                {
+                    arrayTwoDim[indx, 0] = "~";
+                }
+
                 string temp = arrayTwoDim[indx, indy];
                 arrayTwoDim[indx, indy] = arrayTwoDim[indx + 1, indy];
                 arrayTwoDim[indx + 1, indy] = temp;
             }
         }
 
-        //private void BubbleSort()
-        //{
-        //    for (int xa = 0; xa < row; xa++)
-        //    {
-        //        for (int xb = 0; xb < row; xb++)
-        //        {
-        //            if (!(String.IsNullOrEmpty(ArrayWiki[xa, 0])))
-        //            {
-        //                if (String.Compare(ArrayWiki[xa, 0], ArrayWiki[xb, 0]) < 0)
-        //                {
-        //                    for (int y = 0; y < col; y++)
-        //                    {
-        //                        Swap(xa, xb, y);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void Swap(int indxa, int indxb, int indy)
-        //{
-        //    try
-        //    {
-        //        string temp;
-
-        //        temp = ArrayWiki[indxa, indy];
-
-        //        ArrayWiki[indxa, indy] = ArrayWiki[indxb, indy];
-
-        //        ArrayWiki[indxb, indy] = temp;
-        //    }
-        //    catch (IndexOutOfRangeException ex)
-        //    {
-        //        Trace.TraceInformation(ex.ToString());
-        //    }
-        //}
+        private void ReplaceTilde(string[,] arrayTwoDim)
+        {
+            for (int indx = 0; indx < row; indx++)
+            {
+                if (arrayTwoDim[indx, 0] == "~")
+                {
+                    arrayTwoDim[indx, 0] = "";
+                }
+            }
+        }
         #endregion
 
         // 9.7	Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found,
