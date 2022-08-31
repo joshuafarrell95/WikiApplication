@@ -121,6 +121,7 @@ namespace WikiApplication
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
                     TextBoxToArray(selectedIndex);
+                    statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited." );
                 }
                 else
                 {
