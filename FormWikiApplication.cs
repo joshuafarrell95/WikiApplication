@@ -28,7 +28,6 @@ namespace WikiApplication
         private void FormWikiApplication_Load(object sender, EventArgs e)
         {
             InitialiseArray();
-            EnableDevButtons(false);
         }
 
         private void InitialiseArray()
@@ -542,35 +541,5 @@ namespace WikiApplication
             toolTip.SetToolTip(button, message);
         }
         #endregion
-
-        private void checkBoxDeveloperMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDeveloperMode.Checked)
-            {
-                EnableDevButtons(true);
-            }
-            else
-            {
-                EnableDevButtons(false);
-            }
-        }
-
-        private void EnableDevButtons(bool state)
-        {
-            if (state)
-            {
-                buttonSort.Enabled = true;
-            }
-            else
-            {
-                buttonSort.Enabled = false;
-            }
-        }
-
-        private void ButtonSort_MouseClick(object sender, MouseEventArgs e)
-        {
-            BubbleSort();
-            DisplayList();
-        }
     }
 }
