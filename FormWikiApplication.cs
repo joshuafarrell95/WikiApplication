@@ -216,7 +216,6 @@ namespace WikiApplication
                 statusStrip.Items.Add("Please select a valid record to delete");
             }
             BubbleSort();
-            DisplayList();
         }
         #endregion
 
@@ -304,6 +303,7 @@ namespace WikiApplication
             statusStrip.Items.Clear();
             if (textBoxSearch.Text != "")
             {
+                BubbleSort();
                 BinarySearch(textBoxSearch.Text);
             }
             else
