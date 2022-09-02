@@ -191,15 +191,15 @@ namespace WikiApplication
             }
         }
 
-        private void DeleteInformation()
+        private void DeleteInformation()                        /* This method deletes all information from the array */
         {
             for (int x = 0; x < row; x++)
             {
-                DeleteInformation(x);
+                DeleteInformation(x);       /* Call the overloaded method */
             }
         }
 
-        private void DeleteInformation(int selectedIndex)
+        private void DeleteInformation(int selectedIndex)       /* This method deletes information from a selected index */
         {
             statusStrip.Items.Clear();
             try
@@ -379,6 +379,7 @@ namespace WikiApplication
         #endregion
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
+        #region 9.9
         private void ListViewWiki_MouseClick(object sender, MouseEventArgs e)
         {
             SelectDefinition();
@@ -396,6 +397,7 @@ namespace WikiApplication
                 statusStrip.Items.Add("Record " + recordTitle + " selected");
             }
         }
+        #endregion
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
@@ -422,7 +424,7 @@ namespace WikiApplication
                 }
                 else
                 {
-                    savedFileName = SaveData(DEFAULT_FILE_NAME);
+                    savedFileName = SaveData(Application.StartupPath + DEFAULT_FILE_NAME);
                 }
             }
 
