@@ -446,7 +446,7 @@ namespace WikiApplication
                 MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
             }
-            return saveFileName;
+            return Path.GetFileName(saveFileName);
         }
         #endregion
 
@@ -503,7 +503,7 @@ namespace WikiApplication
                 return "";
             }
             DisplayList();
-            return loadFileName;
+            return Path.GetFileName(loadFileName);
         }
         #endregion
 
