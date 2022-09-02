@@ -66,7 +66,7 @@ namespace WikiApplication
         {
             statusStrip.Items.Clear();
             bool flag = false;
-            
+
             for (int x = 0; x < row; x++)
             {
                 if ((ArrayWiki[x, 0] == "") && !flag)
@@ -121,7 +121,7 @@ namespace WikiApplication
                 if (ArrayWiki[selectedIndex, 0] != "")
                 {
                     TextBoxToArray(selectedIndex);
-                    statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited." );
+                    statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited.");
                 }
                 else
                 {
@@ -162,7 +162,8 @@ namespace WikiApplication
             var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
                         "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (userDecision == DialogResult.Yes) {
+            if (userDecision == DialogResult.Yes)
+            {
                 DeleteInformation(selectedIndex);
             }
             else
@@ -337,7 +338,7 @@ namespace WikiApplication
                     min = mid + 1;
                 }
             }
-            if(!isItemFound)
+            if (!isItemFound)
             {
                 MessageBox.Show("Record " + searchString + " not found.", "Search unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -363,9 +364,9 @@ namespace WikiApplication
         // 9.8	Create a display method that will show the following information in a ListView: Name and Category,
         #region 9.8
         private void DisplayList()
-        { 
+        {
             listViewWiki.Items.Clear();
-            for(int x = 0; x < row; x++)
+            for (int x = 0; x < row; x++)
             {
                 ListViewItem lvi = new ListViewItem(ArrayWiki[x, 0]);   /* Name */
                 lvi.SubItems.Add(ArrayWiki[x, 1].ToString());           /* Category */
@@ -393,6 +394,9 @@ namespace WikiApplication
 
         private void ButtonSave_MouseClick(object sender, MouseEventArgs e)
         {
+            statusStrip.Items.Clear();
+            string savedFileName = "";
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.Filter = "dat files (*.dat)|*.dat";
@@ -404,16 +408,21 @@ namespace WikiApplication
                 string fileName = saveFileDialog.FileName;
                 if (saveFileDialog.FileName != "")
                 {
-                    SaveData(fileName);
+                    savedFileName = SaveData(fileName);
                 }
                 else
                 {
-                    SaveData(DEFAULT_FILE_NAME);
+                    savedFileName = SaveData(DEFAULT_FILE_NAME);
                 }
+            }
+
+            if (savedFileName != "")
+            {
+                statusStrip.Items.Add("File " + savedFileName + " saved successfully");
             }
         }
 
-        private void SaveData(string saveFileName)
+        private string SaveData(string saveFileName)
         {
             try
             {
@@ -435,7 +444,9 @@ namespace WikiApplication
             {
                 Trace.TraceInformation(ex.ToString());
                 MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
             }
+            return saveFileName;
         }
         #endregion
 
@@ -444,17 +455,25 @@ namespace WikiApplication
         #region 9.11
         private void ButtonLoad_MouseClick(object sender, MouseEventArgs e)
         {
+            statusStrip.Items.Clear();
+            string loadedFileName = "";
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Application.StartupPath;
             openFileDialog.Filter = "dat files (*.dat)|*.dat";
             openFileDialog.Title = "Open a DAT file";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                LoadData(openFileDialog.FileName);
+                loadedFileName = LoadData(openFileDialog.FileName);
+
+                if (loadedFileName != "")
+                {
+                    statusStrip.Items.Add("File " + loadedFileName + " loaded successfully");
+                }
             }
         }
 
-        private void LoadData(string loadFileName)
+        private string LoadData(string loadFileName)
         {
             try
             {
@@ -481,8 +500,10 @@ namespace WikiApplication
             {
                 Trace.TraceInformation(ex.ToString());
                 MessageBox.Show("File " + loadFileName + " was unable to be loaded due to an IO Error. Please try again.", "Load IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
             }
             DisplayList();
+            return loadFileName;
         }
         #endregion
 
