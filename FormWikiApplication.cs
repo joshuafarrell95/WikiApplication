@@ -217,6 +217,7 @@ namespace WikiApplication
                 statusStrip.Items.Add("Please select a valid record to delete");
             }
             BubbleSort();
+            DisplayList();
         }
         #endregion
 
@@ -383,8 +384,15 @@ namespace WikiApplication
 
         private void SelectDefinition()
         {
-            int selectedIndex = listViewWiki.SelectedIndices[0];
+            statusStrip.Items.Clear();
+            string recordTitle;
+            int selectedIndex = GetSelectedIndex();
             ArrayToTextBox(selectedIndex);
+            recordTitle = ArrayWiki[selectedIndex, 0];
+            if (recordTitle != "")
+            {
+                statusStrip.Items.Add("Record " + recordTitle + " selected");
+            }
         }
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
