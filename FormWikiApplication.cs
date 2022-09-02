@@ -30,11 +30,6 @@ namespace WikiApplication
             InitialiseArray();
         }
 
-        private void EmptyMethod()
-        {
-
-        }
-
         private void InitialiseArray()
         {
             statusStrip.Items.Clear();
