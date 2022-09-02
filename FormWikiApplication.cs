@@ -65,18 +65,18 @@ namespace WikiApplication
         private void AddInformation()
         {
             statusStrip.Items.Clear();
-            bool flag = false;
+            bool flag = false;                  /* Flag to exit method if empty record found */
 
             for (int x = 0; x < row; x++)
             {
-                if ((ArrayWiki[x, 0] == "") && !flag)
+                if ((ArrayWiki[x, 0] == "") && !flag)       /* If empty record is found */
                 {
                     TextBoxToArray(x);
                     flag = true;
                     break;
                 }
             }
-            if (!flag)
+            if (!flag)                                      /* If no empty record is found */
             {
                 MessageBox.Show("You must delete a record before adding a new record.",
                     "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -88,7 +88,7 @@ namespace WikiApplication
             DisplayList();
         }
 
-        private void TextBoxToArray(int indx)
+        private void TextBoxToArray(int indx)           /* Method to convert all textboxes to array */
         {
             ArrayWiki[indx, 0] = textBoxDataStructureName.Text;
             ArrayWiki[indx, 1] = textBoxCategory.Text;
@@ -96,7 +96,7 @@ namespace WikiApplication
             ArrayWiki[indx, 3] = textBoxDefinition.Text;
         }
 
-        private void ArrayToTextBox(int indx)
+        private void ArrayToTextBox(int indx)           /* Method to convert array to all textboxes */
         {
             textBoxDataStructureName.Text = ArrayWiki[indx, 0];
             textBoxCategory.Text = ArrayWiki[indx, 1];
@@ -118,7 +118,7 @@ namespace WikiApplication
             try
             {
                 int selectedIndex = GetSelectedIndex();
-                if (ArrayWiki[selectedIndex, 0] != "")
+                if (ArrayWiki[selectedIndex, 0] != "")          /* Edit record if it is not empty */
                 {
                     TextBoxToArray(selectedIndex);
                     statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited.");
@@ -136,7 +136,7 @@ namespace WikiApplication
             DisplayList();
         }
 
-        private int GetSelectedIndex()
+        private int GetSelectedIndex()                          /* Reuseable getter */
         {
             int selectedIndex;
             try
@@ -159,15 +159,17 @@ namespace WikiApplication
         {
             statusStrip.Items.Clear();
             int selectedIndex = GetSelectedIndex();
+            
+            /* Prompt the user before the final decision*/
             var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
                         "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (userDecision == DialogResult.Yes)
+            if (userDecision == DialogResult.Yes)       /* User confirms deletion request */
             {
                 DeleteInformation(selectedIndex);
             }
-            else
-            {
+            else                                        /* User clicks on no or X button */
+            {   
                 statusStrip.Items.Add("Record not deleted");
             }
         }
