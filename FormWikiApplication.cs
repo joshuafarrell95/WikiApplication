@@ -418,6 +418,8 @@ namespace WikiApplication
 
             if (savedFileName != "")
             {
+                savedFileName = Path.GetFileName(savedFileName);
+
                 statusStrip.Items.Add("File " + savedFileName + " saved successfully");
             }
         }
@@ -468,6 +470,8 @@ namespace WikiApplication
 
                 if (loadedFileName != "")
                 {
+                    loadedFileName = Path.GetFileName(loadedFileName);
+
                     statusStrip.Items.Add("File " + loadedFileName + " loaded successfully");
                 }
             }
