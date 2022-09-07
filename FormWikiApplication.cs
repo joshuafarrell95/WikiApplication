@@ -65,18 +65,18 @@ namespace WikiApplication
         private void AddInformation()
         {
             statusStrip.Items.Clear();
-            bool flag = false;
+            bool flag = false;                  /* Flag to exit method if empty record found */
 
             for (int x = 0; x < row; x++)
             {
-                if ((ArrayWiki[x, 0] == "") && !flag)
+                if ((ArrayWiki[x, 0] == "") && !flag)       /* If empty record is found */
                 {
                     TextBoxToArray(x);
                     flag = true;
                     break;
                 }
             }
-            if (!flag)
+            if (!flag)                                      /* If no empty record is found */
             {
                 MessageBox.Show("You must delete a record before adding a new record.",
                     "Too many records", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -88,7 +88,7 @@ namespace WikiApplication
             DisplayList();
         }
 
-        private void TextBoxToArray(int indx)
+        private void TextBoxToArray(int indx)           /* Method to convert all textboxes to array */
         {
             ArrayWiki[indx, 0] = textBoxDataStructureName.Text;
             ArrayWiki[indx, 1] = textBoxCategory.Text;
@@ -96,7 +96,7 @@ namespace WikiApplication
             ArrayWiki[indx, 3] = textBoxDefinition.Text;
         }
 
-        private void ArrayToTextBox(int indx)
+        private void ArrayToTextBox(int indx)           /* Method to convert array to all textboxes */
         {
             textBoxDataStructureName.Text = ArrayWiki[indx, 0];
             textBoxCategory.Text = ArrayWiki[indx, 1];
@@ -118,7 +118,7 @@ namespace WikiApplication
             try
             {
                 int selectedIndex = GetSelectedIndex();
-                if (ArrayWiki[selectedIndex, 0] != "")
+                if (ArrayWiki[selectedIndex, 0] != "")          /* Edit record if it is not empty */
                 {
                     TextBoxToArray(selectedIndex);
                     statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited.");
@@ -136,7 +136,7 @@ namespace WikiApplication
             DisplayList();
         }
 
-        private int GetSelectedIndex()
+        private int GetSelectedIndex()                          /* Reuseable getter */
         {
             int selectedIndex;
             try
@@ -159,15 +159,17 @@ namespace WikiApplication
         {
             statusStrip.Items.Clear();
             int selectedIndex = GetSelectedIndex();
+            
+            /* Prompt the user before the final decision*/
             var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
                         "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (userDecision == DialogResult.Yes)
+            if (userDecision == DialogResult.Yes)       /* User confirms deletion request */
             {
                 DeleteInformation(selectedIndex);
             }
-            else
-            {
+            else                                        /* User clicks on no or X button */
+            {   
                 statusStrip.Items.Add("Record not deleted");
             }
         }
@@ -189,15 +191,15 @@ namespace WikiApplication
             }
         }
 
-        private void DeleteInformation()
+        private void DeleteInformation()                        /* This method deletes all information from the array */
         {
             for (int x = 0; x < row; x++)
             {
-                DeleteInformation(x);
+                DeleteInformation(x);       /* Call the overloaded method */
             }
         }
 
-        private void DeleteInformation(int selectedIndex)
+        private void DeleteInformation(int selectedIndex)       /* This method deletes information from a selected index */
         {
             statusStrip.Items.Clear();
             try
@@ -305,6 +307,7 @@ namespace WikiApplication
             statusStrip.Items.Clear();
             if (textBoxSearch.Text != "")
             {
+                BubbleSort();
                 BinarySearch(textBoxSearch.Text);
             }
             else
@@ -376,6 +379,7 @@ namespace WikiApplication
         #endregion
 
         // 9.9	Create a method so the user can select a definition (Name) from the ListView and all the information is displayed in the appropriate Textboxes,
+        #region 9.9
         private void ListViewWiki_MouseClick(object sender, MouseEventArgs e)
         {
             SelectDefinition();
@@ -383,9 +387,17 @@ namespace WikiApplication
 
         private void SelectDefinition()
         {
-            int selectedIndex = listViewWiki.SelectedIndices[0];
+            statusStrip.Items.Clear();
+            string recordTitle;
+            int selectedIndex = GetSelectedIndex();
             ArrayToTextBox(selectedIndex);
+            recordTitle = ArrayWiki[selectedIndex, 0];
+            if (recordTitle != "")
+            {
+                statusStrip.Items.Add("Record " + recordTitle + " selected");
+            }
         }
+        #endregion
 
         // 9.10	Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
         // ensure the user has the option to select an alternative file. Use a file stream and BinaryWriter to create the file.
@@ -402,6 +414,7 @@ namespace WikiApplication
             saveFileDialog.Filter = "dat files (*.dat)|*.dat";
             saveFileDialog.Title = "Save a DAT file";
             saveFileDialog.InitialDirectory = Application.StartupPath;
+            saveFileDialog.AddExtension = true;
             saveFileDialog.DefaultExt = "dat";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -412,7 +425,7 @@ namespace WikiApplication
                 }
                 else
                 {
-                    savedFileName = SaveData(DEFAULT_FILE_NAME);
+                    savedFileName = SaveData(Application.StartupPath + DEFAULT_FILE_NAME);
                 }
             }
 
@@ -426,6 +439,7 @@ namespace WikiApplication
 
         private string SaveData(string saveFileName)
         {
+            BubbleSort();
             try
             {
                 using (Stream stream = File.Open(saveFileName, FileMode.Create))
@@ -448,7 +462,7 @@ namespace WikiApplication
                 MessageBox.Show("File " + saveFileName + " was unable to be saved due to an IO Error. Please try again.", "Save IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
             }
-            return saveFileName;
+            return Path.GetFileName(saveFileName);
         }
         #endregion
 
@@ -507,7 +521,7 @@ namespace WikiApplication
                 return "";
             }
             DisplayList();
-            return loadFileName;
+            return Path.GetFileName(loadFileName);
         }
         #endregion
 
