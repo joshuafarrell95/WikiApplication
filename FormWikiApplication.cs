@@ -85,6 +85,7 @@ namespace WikiApplication
             {
                 statusStrip.Items.Add("Record added to Wiki Array");
             }
+            BubbleSort();
             DisplayList();
         }
 
@@ -118,10 +119,13 @@ namespace WikiApplication
             try
             {
                 int selectedIndex = GetSelectedIndex();
-                if (ArrayWiki[selectedIndex, 0] != "")          /* Edit record if it is not empty */
+                if (selectedIndex >= 0)                             /* Edit record if there is a valid selected record */
                 {
-                    TextBoxToArray(selectedIndex);
-                    statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited.");
+                    if (ArrayWiki[selectedIndex, 0] != "")          /* Edit record if it is not empty */
+                    {
+                        TextBoxToArray(selectedIndex);
+                        statusStrip.Items.Add("Record " + ArrayWiki[selectedIndex, 0] + " successfully edited.");
+                    }
                 }
                 else
                 {
@@ -133,6 +137,7 @@ namespace WikiApplication
                 Trace.TraceInformation(ex.ToString());
                 statusStrip.Items.Add("Please select a valid record to edit");
             }
+            BubbleSort();
             DisplayList();
         }
 
@@ -260,7 +265,7 @@ namespace WikiApplication
 
         private void BubbleSort(string[,] arrayTwoDim)
         {
-            ReplaceString(arrayTwoDim, "", "~");
+            ReplaceString(arrayTwoDim, "", "~");    /* Temporarily change empty records to tilde to sink them to the bottom of the list */
             for (int xi = 0; xi < row; xi++)
             {
                 for (int xj = 0; xj < row - 1; xj++)
@@ -274,7 +279,7 @@ namespace WikiApplication
                     }
                 }
             }
-            ReplaceString(arrayTwoDim, "~", "");
+            ReplaceString(arrayTwoDim, "~", "");    /* Change tilde records back to empty for correct display in the ListView */
         }
 
         private void Sort(string[,] arrayTwoDim, int indx)
@@ -287,7 +292,7 @@ namespace WikiApplication
             }
         }
 
-        private void ReplaceString(string[,] arrayTwoDim, string sa, string sb)
+        private void ReplaceString(string[,] arrayTwoDim, string sa, string sb)         /* Method used to replace empty record names with a tilde for correct sorting, and back again for correct display */
         {
             for (int indx = 0; indx < row; indx++)
             {
@@ -530,6 +535,7 @@ namespace WikiApplication
         // Map the programming criteria and features to your code/methods by adding comments above the method signatures.
         // Ensure your code is compliant with the CITEMS coding standards (refer http://www.citems.com.au/).
         #region 9.12
+        /* Commented out for functional testing
         private void TextBoxDataStucture_MouseHover(object sender, EventArgs e)
         {
             DisplayToolTip("Enter the Data Structure Name here, or double click on this text box to clear all text boxes.", textBoxDataStructureName);
@@ -580,6 +586,7 @@ namespace WikiApplication
         {
             toolTip.SetToolTip(button, message);
         }
+        */
         #endregion
     }
 }
