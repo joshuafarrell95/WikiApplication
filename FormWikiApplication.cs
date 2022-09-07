@@ -10,6 +10,11 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 
+// Wiki Application
+// Farrell, Joshua
+// M153428
+// 07/09/2022
+
 namespace WikiApplication
 {
     public partial class FormWikiApplication : Form
@@ -164,18 +169,27 @@ namespace WikiApplication
         {
             statusStrip.Items.Clear();
             int selectedIndex = GetSelectedIndex();
-            
-            /* Prompt the user before the final decision*/
-            var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
-                        "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (userDecision == DialogResult.Yes)       /* User confirms deletion request */
+            if (selectedIndex >= 0)
             {
-                DeleteInformation(selectedIndex);
+                /* Prompt the user before the final decision*/
+                var userDecision = MessageBox.Show("Are you sure you want to delete the selected record " + ArrayWiki[selectedIndex, 0] + "?",
+                        "Confirm record deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                string deletedRecordName = ArrayWiki[selectedIndex, 0];
+                if (userDecision == DialogResult.Yes)       /* User confirms deletion request */
+                {
+                    DeleteInformation(selectedIndex);
+                    //ClearTextBoxes();
+                    statusStrip.Items.Add("Record " + deletedRecordName + " deleted from array");
+                }
+                else                                        /* User clicks on no or X button */
+                {
+                    statusStrip.Items.Add("Record not deleted");
+                }
             }
-            else                                        /* User clicks on no or X button */
-            {   
-                statusStrip.Items.Add("Record not deleted");
+            else
+            {
+                statusStrip.Items.Add("You must select a record to delete");
             }
         }
 
@@ -395,12 +409,15 @@ namespace WikiApplication
             statusStrip.Items.Clear();
             string recordTitle;
             int selectedIndex = GetSelectedIndex();
-            ArrayToTextBox(selectedIndex);
-            recordTitle = ArrayWiki[selectedIndex, 0];
-            if (recordTitle != "")
+            if (selectedIndex >= 0)
             {
-                statusStrip.Items.Add("Record " + recordTitle + " selected");
-            }
+                ArrayToTextBox(selectedIndex);
+                recordTitle = ArrayWiki[selectedIndex, 0];
+                if (recordTitle != "")
+                {
+                    statusStrip.Items.Add("Record " + recordTitle + " selected");
+                }
+            }            
         }
         #endregion
 
@@ -535,58 +552,57 @@ namespace WikiApplication
         // Map the programming criteria and features to your code/methods by adding comments above the method signatures.
         // Ensure your code is compliant with the CITEMS coding standards (refer http://www.citems.com.au/).
         #region 9.12
-        /* Commented out for functional testing
+        /* Commented out for functional testing */
         private void TextBoxDataStucture_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter the Data Structure Name here, or double click on this text box to clear all text boxes.", textBoxDataStructureName);
+            //DisplayToolTip("Enter the Data Structure Name here, or double click on this text box to clear all text boxes.", textBoxDataStructureName);
         }
 
         private void TextBoxCategory_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter the Category here.", textBoxCategory);
+            //DisplayToolTip("Enter the Category here.", textBoxCategory);
         }
 
         private void TextBoxStructure_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter the Structure here.", textBoxStructure);
+            //DisplayToolTip("Enter the Structure here.", textBoxStructure);
         }
 
         private void TextBoxDefinition_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter the Definition here.", textBoxDefinition);
+            //DisplayToolTip("Enter the Definition here.", textBoxDefinition);
         }
 
         private void TextBoxSearch_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter a search term here, then click on the SEARCH button", textBoxSearch);
+            //DisplayToolTip("Enter a search term here, then click on the SEARCH button", textBoxSearch);
         }
 
         private void ButtonSearch_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Enter a search term in the Search textbox, then click on this button.", buttonSearch);
+            //DisplayToolTip("Enter a search term in the Search textbox, then click on this button.", buttonSearch);
         }
 
         private void ListViewWiki_MouseHover(object sender, EventArgs e)
         {
-            DisplayToolTip("Click on a record to display its contents.\r\n" +
-                "Double click to delete all records. ", listViewWiki);
+            //DisplayToolTip("Click on a record to display its contents.\r\n" +
+            //    "Double click to delete all records. ", listViewWiki);
         }
 
         private void DisplayToolTip(string message, TextBox textbox)
         {
-            toolTip.SetToolTip(textbox, message);
+            //toolTip.SetToolTip(textbox, message);
         }
 
         private void DisplayToolTip(string message, ListView listView)
         {
-            toolTip.SetToolTip(listView, message);
+            //toolTip.SetToolTip(listView, message);
         }
 
         private void DisplayToolTip(string message, Button button)
         {
-            toolTip.SetToolTip(button, message);
+            //toolTip.SetToolTip(button, message);
         }
-        */
         #endregion
     }
 }
