@@ -214,7 +214,7 @@ namespace WikiApplication
         {
             for (int x = 0; x < row; x++)
             {
-                DeleteInformation(x);       /* Call the overloaded method */
+                InitialiseArray();
             }
         }
 
