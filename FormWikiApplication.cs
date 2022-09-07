@@ -414,6 +414,7 @@ namespace WikiApplication
             saveFileDialog.Filter = "dat files (*.dat)|*.dat";
             saveFileDialog.Title = "Save a DAT file";
             saveFileDialog.InitialDirectory = Application.StartupPath;
+            saveFileDialog.AddExtension = true;
             saveFileDialog.DefaultExt = "dat";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -436,6 +437,7 @@ namespace WikiApplication
 
         private string SaveData(string saveFileName)
         {
+            BubbleSort();
             try
             {
                 using (Stream stream = File.Open(saveFileName, FileMode.Create))
