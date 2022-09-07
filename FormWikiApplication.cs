@@ -327,6 +327,7 @@ namespace WikiApplication
             if (textBoxSearch.Text != "")
             {
                 BubbleSort();
+                DisplayList();
                 BinarySearch(textBoxSearch.Text);
             }
             else
@@ -349,6 +350,7 @@ namespace WikiApplication
                 {
                     isItemFound = true;
                     HighlightRecord(mid);
+                    SelectDefinition(mid);
                     break;
                 }
                 else if (searchString.CompareTo(ArrayWiki[mid, 0]) < 0)
@@ -366,6 +368,7 @@ namespace WikiApplication
             }
             else
             {
+                statusStrip.Items.Clear();
                 statusStrip.Items.Add("Record " + searchString + " found and highlighted.");
             }
             textBoxSearch.Clear();
@@ -406,9 +409,17 @@ namespace WikiApplication
 
         private void SelectDefinition()
         {
+            int selectedIndex = GetSelectedIndex();
+            if (selectedIndex >= 0)
+            {
+                SelectDefinition(selectedIndex);
+            }            
+        }
+
+        private void SelectDefinition(int selectedIndex)
+        {
             statusStrip.Items.Clear();
             string recordTitle;
-            int selectedIndex = GetSelectedIndex();
             if (selectedIndex >= 0)
             {
                 ArrayToTextBox(selectedIndex);
@@ -417,7 +428,7 @@ namespace WikiApplication
                 {
                     statusStrip.Items.Add("Record " + recordTitle + " selected");
                 }
-            }            
+            }
         }
         #endregion
 
